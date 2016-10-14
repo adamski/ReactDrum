@@ -11,8 +11,12 @@ class MainContentComponent   : public AudioAppComponent,
 public:
     MainContentComponent()
     : state (Stopped),
-    thumbnailCache (5),                            // [4]
-    thumbnail (512, formatManager, thumbnailCache) // [5]
+    thumbnailCache (5),
+    thumbnail (512, formatManager, thumbnailCache),
+    thumbnailBackground (Colours::white),
+    thumbnailForeground (Colours::grey),
+    audioPositionColour (Colours::green),
+    backgroundColour (Colours::lightcoral)
     {
         setLookAndFeel (&lookAndFeel);
         
@@ -33,6 +37,8 @@ public:
         loadSampleFromName ("Chhhhaah");
         
         startTimer (40);
+        
+        setPlayButtonTextColour("FF223344");
         
         
     }
@@ -63,6 +69,7 @@ public:
     
     void paint (Graphics& g) override
     {
+        g.fillAll (backgroundColour);
         const Rectangle<int> thumbnailBounds (10, 100, getWidth() - 20, getHeight() - 120);
         
         if (thumbnail.getNumChannels() == 0)
@@ -73,7 +80,7 @@ public:
     
     void resized() override
     {
-        playButton.setBounds (10, 40, getWidth() - 20, 20);
+        playButton.setBounds (10, 10, getWidth() - 20, 80);
     }
     
     void changeListenerCallback (ChangeBroadcaster* source) override
@@ -87,6 +94,31 @@ public:
         if (button == &playButton)  playButtonClicked();
     }
     
+    void setPlayButtonColour(String colourString)
+    {
+        playButton.setColour (TextButton::buttonColourId, Colour::fromString (colourString));
+    }
+    
+    void setPlayButtonTextColour(String colourString)
+    {
+        playButton.setColour (TextButton::textColourOnId, Colour::fromString (colourString));
+        playButton.setColour (TextButton::textColourOffId, Colour::fromString (colourString));
+    }
+    
+    void setThumbnailBackground(String colourString)
+    {
+        thumbnailBackground = Colour::fromString (colourString);
+    }
+    
+    void setThumbnailForeground(String colourString)
+    {
+        thumbnailForeground = Colour::fromString (colourString);
+    }
+    
+    void setAudioPositionColour(String colourString)
+    {
+        audioPositionColour = Colour::fromString (colourString);
+    }
     
 private:
     enum TransportState
@@ -111,7 +143,6 @@ private:
             switch (state)
             {
                 case Stopped:
-                    stopButton.setEnabled (false);
                     playButton.setEnabled (true);
                     transportSource.setPosition (0.0);
                     break;
@@ -123,7 +154,6 @@ private:
                     break;
                     
                 case Playing:
-                    stopButton.setEnabled (true);
                     break;
                     
                 case Stopping:
@@ -157,10 +187,10 @@ private:
     
     void paintIfFileLoaded (Graphics& g, const Rectangle<int>& thumbnailBounds)
     {
-        g.setColour (Colours::white);
-        g.fillRect (thumbnailBounds);
+        g.setColour (thumbnailBackground);
+        g.fillRoundedRectangle (thumbnailBounds.toFloat(), 5.0f);
         
-        g.setColour (Colours::red);                                     // [8]
+        g.setColour (thumbnailForeground);                                     // [8]
         
         const double audioLength (thumbnail.getTotalLength());
         thumbnail.drawChannels (g,                                      // [9]
@@ -169,7 +199,7 @@ private:
                                 thumbnail.getTotalLength(),             // end time
                                 1.0f);                                  // vertical zoom
         
-        g.setColour (Colours::green);
+        g.setColour (audioPositionColour);
         
         const double audioPosition (transportSource.getCurrentPosition());
         const float drawPosition ((audioPosition / audioLength) * thumbnailBounds.getWidth()
@@ -181,12 +211,13 @@ private:
     StringArray getSampleNames()
     {
         StringArray list;
+        String formatExtensionUnderscore = "_" + String(audioFormatExtension);
         
         for (int i = 0; i < BinaryData::namedResourceListSize; ++i)
         {
             String filename = BinaryData::namedResourceList[i];
-            if (filename.endsWith("_ogg"))
-                list.add (filename.upToLastOccurrenceOf("_ogg", false, true));
+            if (filename.endsWith (formatExtensionUnderscore))
+                list.add (filename.upToLastOccurrenceOf (formatExtensionUnderscore, false, true));
         }
         return list;
     }
@@ -194,10 +225,9 @@ private:
     void loadSampleFromName (String name)
     {
         int dataSizeInBytes;
-        const char* filename = BinaryData::getNamedResource (String (name + "_ogg").toRawUTF8(), dataSizeInBytes);
+        const char* filename = BinaryData::getNamedResource (String (name + "_" + String (audioFormatExtension)).toRawUTF8(), dataSizeInBytes);
         
-        loadNewSample (filename, dataSizeInBytes, "ogg");
-        
+        loadNewSample (filename, dataSizeInBytes, audioFormatExtension);
     }
     
     void loadNewSample (const void* data, int dataSize, const char* format)
@@ -229,10 +259,10 @@ private:
         changeState (Starting);
     }
     
+    
     //==========================================================================
-    TextButton openButton;
     TextButton playButton;
-    TextButton stopButton;
+    
     
     AudioFormatManager formatManager;                    // [3]
     ScopedPointer<AudioFormatReaderSource> readerSource;
@@ -244,6 +274,10 @@ private:
     AudioThumbnail thumbnail;                            // [2]
     
     LookAndFeel_V3 lookAndFeel;
+    Colour thumbnailBackground, thumbnailForeground, audioPositionColour;
+    Colour backgroundColour;
+    
+    const char* audioFormatExtension = "ogg";
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainContentComponent)
 };

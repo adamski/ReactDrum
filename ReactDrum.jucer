@@ -6,8 +6,6 @@
   <MAINGROUP id="ZOLEZW" name="ReactDrum">
     <GROUP id="{DD1A41CE-42EC-EC32-6645-08F7572FD66F}" name="BinaryData">
       <FILE id="NVJT2U" name="Bad roll.ogg" compile="0" resource="1" file="BinaryData/Bad roll.ogg"/>
-      <FILE id="xQ03JO" name="Bad roll.wav.ogg" compile="0" resource="1"
-            file="BinaryData/Bad roll.wav.ogg"/>
       <FILE id="JmiCu9" name="Bell_Forbidden2.ogg" compile="0" resource="1"
             file="BinaryData/Bell_Forbidden2.ogg"/>
       <FILE id="RCtXmI" name="Chhhhaah.ogg" compile="0" resource="1" file="BinaryData/Chhhhaah.ogg"/>
