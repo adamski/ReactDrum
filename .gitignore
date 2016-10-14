@@ -1,5 +1,6 @@
 .ycm_extra_conf.pyc
 tags
+WaveSamples
 Builds/AndroidStudio/app/src/main/jni
 # Xcode
 .DS_Store
