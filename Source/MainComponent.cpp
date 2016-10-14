@@ -30,16 +30,13 @@ public:
         
         formatManager.registerBasicFormats();
         transportSource.addChangeListener (this);
-        thumbnail.addChangeListener (this);            // [6]
+        thumbnail.addChangeListener (this);
         
         setAudioChannels (2, 2);
         
         loadSampleFromName ("Chhhhaah");
         
         startTimer (40);
-        
-        setPlayButtonTextColour("FF223344");
-        
         
     }
     
@@ -236,17 +233,15 @@ private:
         
         ScopedPointer<AudioFormatReader> reader = formatManager.findFormatForFileExtension (format)->createReaderFor (soundBuffer, true);
         
-        DBG ("Read in " << reader->lengthInSamples << " samples");
-        
-        ScopedPointer<AudioFormatReaderSource> newSource = new AudioFormatReaderSource (reader, true);
-        
-        DBG ("newSource: " << newSource->getTotalLength());
-        
-        transportSource.setSource (newSource, 0, nullptr, reader->sampleRate);
-        playButton.setEnabled (true);
-        thumbnail.setReader(reader, generateHashForSample(data, 128));
-        readerSource = newSource.release();
-        formatReader = reader.release();
+        if (reader != nullptr)
+        {
+            if ((readerSource = new AudioFormatReaderSource (reader, false)))
+            {
+                transportSource.setSource (readerSource, 0, nullptr, reader->sampleRate);
+                playButton.setEnabled (true);
+                thumbnail.setReader (reader.release(), generateHashForSample (data, 128));
+            }
+        }
     }
     
     int generateHashForSample(const void* data, const int upperLimit)
