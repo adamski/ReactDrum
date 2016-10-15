@@ -1,16 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { View, StyleSheet, NavigatorIOS, Text, Platform, requireNativeComponent } from 'react-native'
+import { View, Text, StyleSheet, NativeModules, requireNativeComponent } from 'react-native'
 
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    // borderTopColor: colours.mediumOutline,
-    // borderTopWidth: 1,
-    backgroundColor: '#000'
   }
 });
 
-import { NativeModules } from 'react-native'
 // const ScaleController = NativeModules.ReactScaleController;
 
 console.log("about to requireNativeComponent ReactJuceView")

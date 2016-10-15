@@ -1,9 +1,14 @@
 #import "RCTView.h"
 #import <UIKit/UIKit.h>
 
+#include "JuceHeader.h"
+
 @interface ReactJuceView : RCTView
 
-@property (nonatomic, assign) NSString *dummy;
+- (instancetype)initWithJuceComponent:(Component*)component;
+
+@property (nonatomic, assign) NSString* dummy;
+@property (nonatomic, assign) Component* juceComponent;
 // TODO: Add colour, and possibly height/width properties
 
 @end
