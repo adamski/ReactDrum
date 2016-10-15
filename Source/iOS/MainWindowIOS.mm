@@ -25,19 +25,6 @@ MainWindow::MainWindow (String name)  : DocumentWindow (name,
                                                         DocumentWindow::allButtons)
 {
     
-//    // Enable audio I/O in iOS
-//    NSError *setCategoryError = nil;
-//    BOOL success = [[AVAudioSession sharedInstance]
-//                    setCategory: AVAudioSessionCategoryPlayAndRecord
-//                    error: &setCategoryError];
-//    
-//    if (!success)
-//    {
-//        /* handle the error in setCategoryError */
-//        DBG ("Error setting category AVAudioSessionCategoryPlayAndRecord");
-//    }
-    
-    
     //------------------------------------------------------
     // React Native
     //------------------------------------------------------
