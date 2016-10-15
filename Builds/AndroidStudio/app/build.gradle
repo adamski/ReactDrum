@@ -20,6 +20,7 @@ model {
         cppFlags.add("-DJUCER_ANDROIDSTUDIO_4330F05B=1")
         cppFlags.add("-DJUCE_APP_VERSION=1.0.0")
         cppFlags.add("-DJUCE_APP_VERSION_HEX=0x10000")
+        cppFlags.add("-I${project.rootDir}/../../Source/iOS".toString())
         cppFlags.add("-I${project.rootDir}/../../BinaryData".toString())
         cppFlags.add("-I${project.rootDir}/../../Source".toString())
         ldLibs.add("android")

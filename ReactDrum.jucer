@@ -2,8 +2,20 @@
 
 <JUCERPROJECT id="Ow8IIC" name="ReactDrum" projectType="guiapp" version="1.0.0"
               bundleIdentifier="com.yourcompany.ReactDrum" includeBinaryInAppConfig="1"
-              jucerVersion="4.2.3">
+              jucerVersion="4.2.4">
   <MAINGROUP id="ZOLEZW" name="ReactDrum">
+    <GROUP id="{49A6A868-6004-6CB5-220F-414C754B4F69}" name="iOS">
+      <FILE id="Vvo7x1" name="ReactJuceView.h" compile="0" resource="0" file="Source/iOS/ReactJuceView.h"/>
+      <FILE id="WR9eAM" name="ReactJuceView.mm" compile="1" resource="0"
+            file="Source/iOS/ReactJuceView.mm"/>
+      <FILE id="bbW1u9" name="ReactJuceViewManager.h" compile="0" resource="0"
+            file="Source/iOS/ReactJuceViewManager.h"/>
+      <FILE id="sg3IPE" name="ReactJuceViewManager.mm" compile="1" resource="0"
+            file="Source/iOS/ReactJuceViewManager.mm"/>
+      <FILE id="nKVzKo" name="MainWindowIOS.mm" compile="1" resource="0"
+            file="Source/iOS/MainWindowIOS.mm"/>
+      <FILE id="OsU8oz" name="MainWindowIOS.h" compile="0" resource="0" file="Source/iOS/MainWindowIOS.h"/>
+    </GROUP>
     <GROUP id="{DD1A41CE-42EC-EC32-6645-08F7572FD66F}" name="BinaryData">
       <FILE id="NVJT2U" name="Bad roll.ogg" compile="0" resource="1" file="BinaryData/Bad roll.ogg"/>
       <FILE id="JmiCu9" name="Bell_Forbidden2.ogg" compile="0" resource="1"
@@ -34,6 +46,7 @@
             file="BinaryData/thisWorld end.ogg"/>
     </GROUP>
     <GROUP id="{79FDD44B-9F03-E559-87A7-C5A1AEC0343D}" name="Source">
+      <FILE id="JBKArC" name="MainWindow.h" compile="0" resource="0" file="Source/MainWindow.h"/>
       <FILE id="WtVKth" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
       <FILE id="kHHxpu" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
@@ -62,10 +75,13 @@
         <MODULEPATH id="juce_audio_utils" path="JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <XCODE_IPHONE targetFolder="Builds/iOS" iosScreenOrientation="portraitlandscape">
+    <XCODE_IPHONE targetFolder="Builds/iOS" iosScreenOrientation="portraitlandscape"
+                  extraLinkerFlags="" customPList="&lt;plist&gt;&#10;&lt;dict&gt;&#10;&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;&#10;    &lt;dict&gt;&#10;        &lt;key&gt;NSExceptionDomains&lt;/key&gt;&#10;        &lt;dict&gt;&#10;            &lt;key&gt;localhost&lt;/key&gt;&#10;            &lt;dict&gt;         &#10;                &lt;key&gt;NSTemporaryExceptionAllowsInsecureHTTPLoads&lt;/key&gt;&#10;                &lt;true/&gt;&#10;            &lt;/dict&gt;&#10;            &lt;key&gt;codegarden.cloudant.com&lt;/key&gt;&#10;            &lt;dict&gt;&#10;                &lt;key&gt;NSTemporaryExceptionAllowsInsecureHTTPLoads&lt;/key&gt;&#10;                &lt;true/&gt;&#10;            &lt;/dict&gt;&#10;        &lt;/dict&gt;&#10;    &lt;/dict&gt;&#10;&lt;/dict&gt;&#10;&lt;/plist&gt;">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="ReactDrum"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="ReactDrum"/>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="ReactDrum"
+                       defines="$(inherited)&#10;" binaryPath="$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="ReactDrum"
+                       defines="$(inherited)" binaryPath="$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="JUCE/modules"/>

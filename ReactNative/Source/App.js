@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
+import DrumPlayer from './Components/DrumPlayer'
+
 class MainScreen extends Component {
   render() {
     return (
@@ -52,12 +54,13 @@ const styles = StyleSheet.create({
 export default class App {
   constructor() {
 
-    Navigation.registerComponent('myapp.MainScreen', () => MainScreen);
+    Navigation.registerComponent('reactDrum.MainScreen', () => MainScreen)
+    Navigation.registerComponent('reactDrum.DrumPlayer', () => DrumPlayer)
     Navigation.startSingleScreenApp({
       screen: {
-        screen: 'myapp.MainScreen',
-        title: 'Navigation Bootstrap'
+        screen: 'reactDrum.DrumPlayer',
+        title: 'JUCE + React Native'
       }
-    });
+    })
   }
 }

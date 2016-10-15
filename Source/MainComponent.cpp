@@ -278,8 +278,5 @@ private:
 };
 
 
-Component* createMainContentComponent()     { return new MainContentComponent(); }
-
-
 #endif  // MAINCOMPONENT_H_INCLUDED
 
