@@ -21,7 +21,7 @@
     self = [super init];
     
     if (self) {
-        _juceComponent = component;
+        self.juceComponent = component;
         
         component->addToDesktop (0, self);
         component->setVisible (true);
@@ -33,8 +33,8 @@
 {
     [super reactSetFrame: frame];
     
-    _juceComponent->setBounds (frame.origin.x, frame.origin.y,
-                    frame.size.width, frame.size.height);
+    self.juceComponent->setBounds (frame.origin.x, frame.origin.y,
+                                   frame.size.width, frame.size.height);
 }
 
 

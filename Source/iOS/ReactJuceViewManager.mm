@@ -20,6 +20,7 @@ RCT_EXPORT_VIEW_PROPERTY(dummy, NSString)
 - (UIView *)view
 {
     MainContentComponent* mainComponent = new MainContentComponent();
+    // do stuff with view properties e.g. mainComponent->setPlayButtonColour(<#juce::String colourString#>)
     
     return [[ReactJuceView alloc] initWithJuceComponent:mainComponent];
 }

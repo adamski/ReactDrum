@@ -7,7 +7,6 @@
 
 - (instancetype)initWithJuceComponent:(Component*)component;
 
-@property (nonatomic, assign) NSString* dummy;
 @property (nonatomic, assign) Component* juceComponent;
 // TODO: Add colour, and possibly height/width properties
 
