@@ -4,8 +4,8 @@ model {
         compileSdkVersion = 23
         buildToolsVersion = "23.0.2"
         defaultConfig.with {
-            applicationId = "com.yourcompany.reactdrum"
-            minSdkVersion.apiLevel = 23
+            applicationId = "com.nodeaudio.reactdrum"
+            minSdkVersion.apiLevel = 16
             targetSdkVersion.apiLevel = 23
         }
     }
@@ -17,6 +17,8 @@ model {
         cppFlags.add("-fexceptions")
         cppFlags.add("-frtti")
         cppFlags.add("-std=c++11")
+        cppFlags.add("-DJUCE_ANDROID_ACTIVITY_CLASSNAME=com_nodeaudio_reactdrum_MainActivity")
+        cppFlags.add("-DJUCE_ANDROID_ACTIVITY_CLASSPATH='com/nodeaudio/reactdrum/MainActivity'")
         cppFlags.add("-DJUCER_ANDROIDSTUDIO_4330F05B=1")
         cppFlags.add("-DJUCE_APP_VERSION=1.0.0")
         cppFlags.add("-DJUCE_APP_VERSION_HEX=0x10000")
@@ -39,16 +41,14 @@ model {
     }
     android.buildTypes {
         debug {
+            signingConfig = $("android.signingConfigs.releaseConfig")
             ndk.with {
-                debuggable = true
-                cppFlags.add("-g")
-                cppFlags.add("-DDEBUG=1")
-                cppFlags.add("-D_DEBUG=1")
-                cppFlags.add("-O0")
+                cppFlags.add("-DNDEBUG=1")
+                cppFlags.add("-O3")
                 cppFlags.add("-I${project.rootDir}/../../JuceLibraryCode".toString())
                 cppFlags.add("-I${project.rootDir}/../../JUCE/modules".toString())
                 cppFlags.add("-DJUCE_ANDROID=1")
-                cppFlags.add("-DJUCE_ANDROID_API_VERSION=23")
+                cppFlags.add("-DJUCE_ANDROID_API_VERSION=16")
                 cppFlags.add("-DJUCE_ANDROID_BRIDGE_CLASSNAME=com_juce_JuceBridge")
                 cppFlags.add("-DJUCE_ANDROID_BRIDGE_CLASSPATH=\"com/juce/JuceBridge\"")
             }
@@ -61,7 +61,7 @@ model {
                 cppFlags.add("-I${project.rootDir}/../../JuceLibraryCode".toString())
                 cppFlags.add("-I${project.rootDir}/../../JUCE/modules".toString())
                 cppFlags.add("-DJUCE_ANDROID=1")
-                cppFlags.add("-DJUCE_ANDROID_API_VERSION=23")
+                cppFlags.add("-DJUCE_ANDROID_API_VERSION=16")
                 cppFlags.add("-DJUCE_ANDROID_BRIDGE_CLASSNAME=com_juce_JuceBridge")
                 cppFlags.add("-DJUCE_ANDROID_BRIDGE_CLASSPATH=\"com/juce/JuceBridge\"")
             }
@@ -89,5 +89,9 @@ model {
     }
 }
 dependencies {
+    compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:support-v4:+"
+    compile "com.android.support:appcompat-v7:23.0.2"
+    compile "com.facebook.react:react-native:+"
+    compile project(':react-native-navigation')
 }

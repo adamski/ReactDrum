@@ -3,11 +3,16 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle-experimental:0.7.0-rc1'
+        classpath 'com.android.tools.build:gradle-experimental:0.8.0'
     }
 }
 allprojects {
     repositories {
+        mavenLocal()
         jcenter()
+        
+        maven {
+            url "$rootDir/../../node_modules/react-native/android"
+        }
     }
 }

@@ -5,7 +5,7 @@
 
 @interface ReactJuceView : RCTView
 
-- (instancetype)initWithJuceComponent:(Component*)component;
+- (instancetype) initWithJuceComponent : (Component*) component;
 
 @property (nonatomic, assign) Component* juceComponent;
 // TODO: Add colour, and possibly height/width properties

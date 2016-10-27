@@ -1,5 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, StyleSheet, NativeModules, requireNativeComponent } from 'react-native'
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  NativeModules,
+  DeviceEventEmitter,
+  requireNativeComponent } from 'react-native'
 
 var styles = StyleSheet.create({
   container: {
@@ -12,7 +18,8 @@ var styles = StyleSheet.create({
 console.log("about to requireNativeComponent ReactJuceView")
 const ReactJuceView = requireNativeComponent('ReactJuceView', JuceComponent, { 
   nativeOnly: {
-    showModal: true
+    showModal: true,
+    juceAppHasInitialised: true
   }
 })
 console.log("done requireNativeComponent")
@@ -26,7 +33,24 @@ class JuceComponent extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
+    this.state = {
+      juceAppHasInitialised: false
+    }
+  }
+
+  // componentDidMount() {
+  //   setTimeout(() => {
+  //     this.setState({juceAppHasInitialised: true})
+  //   }, 8000)
+  // }
+
+
+  componentWillMount() {
+    DeviceEventEmitter.addListener('juceAppHasInitialised', (event: Event) => {
+      console.log("componentDidMount: juceAppHasInitialised")
+      this.setState({juceAppHasInitialised: true})
+    })
   }
 
   showModal = (event: Event) => { 
@@ -38,7 +62,11 @@ class JuceComponent extends React.Component {
   }
 
   render() {
-    return <ReactJuceView {...this.props} />
+    // if (this.state.juceAppHasInitialised) {
+      return <ReactJuceView {...this.props} />
+    // } else {
+    //   return <Text>Initialising...</Text>
+    // }
   }
 }
 
@@ -66,7 +94,11 @@ class DrumPlayer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <JuceComponent style={{flex: 1}} onPressModalButton={this.showModal} />
+        <Text>Some text</Text>
+        <JuceComponent 
+          style={{flex: 1}} 
+          onPressModalButton={this.showModal}
+        />
       </View>
     )
   }

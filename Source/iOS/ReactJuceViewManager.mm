@@ -9,7 +9,7 @@
 #import "ReactJuceViewManager.h"
 #import "ReactJuceView.h"
 
-#include "../MainComponent.cpp"  // This could be any other component you wish to use
+#include "../MainComponent.h"  // This could be any other component you wish to use
 
 @implementation ReactJuceViewManager
 

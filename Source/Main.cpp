@@ -12,6 +12,12 @@
 
 #if JUCE_IOS
 #include "iOS/MainWindowIOS.h"
+#elif JUCE_ANDROID
+#include "MainComponent.h"
+namespace juce
+{
+#include "../JuceModules/juce_core/native/juce_android_JNIHelpers.h"
+}
 #else
 #include "MainWindow.h"
 #endif
@@ -32,14 +38,27 @@ public:
     {
         // This method is where you should put your application's initialisation code..
 
+#if JUCE_ANDROID
+        // Set up our windows that will be attached to Android views
+        container = new ResizableWindow ("MainComponent", true);
+        container->setContentOwned (new MainContentComponent(), true);
+        container->setUsingNativeTitleBar (true);
+        container->setFullScreen (true);
+        container->setVisible (true);
+#else
+        // Instantiate MainWindow
         mainWindow = new MainWindow (getApplicationName());
+#endif
     }
 
     void shutdown() override
     {
         // Add your application's shutdown code here..
-
+#if JUCE_ANDROID
+        container = nullptr;
+#else
         mainWindow = nullptr; // (deletes our window)
+#endif
     }
 
     //==============================================================================
@@ -57,12 +76,34 @@ public:
         // the other instance's command-line arguments were.
     }
 
-
+#if JUCE_ANDROID
+    void attachOpenGLContext()
+    {
+        if (! openGLContext.isAttached())
+            openGLContext.attachTo (*container);
+    }
+#endif
 
 private:
+#if JUCE_ANDROID
+    ScopedPointer<ResizableWindow> container;
+#else
     ScopedPointer<MainWindow> mainWindow;
+#endif
+    OpenGLContext openGLContext;
 };
 
 //==============================================================================
 // This macro generates the main() routine that launches the app.
 START_JUCE_APPLICATION (ReactDrumApplication)
+
+#if JUCE_ANDROID
+JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, attachOpenGLContext, void, (JNIEnv* env, jclass))
+{
+    ReactDrumApplication* const app = dynamic_cast<ReactDrumApplication*> (JUCEApplication::getInstance());
+    if (app != nullptr)
+    {
+        app->attachOpenGLContext();
+    }
+}
+#endif

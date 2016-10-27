@@ -56,11 +56,15 @@ export default class App {
 
     Navigation.registerComponent('reactDrum.MainScreen', () => MainScreen)
     Navigation.registerComponent('reactDrum.DrumPlayer', () => DrumPlayer)
-    Navigation.startSingleScreenApp({
-      screen: {
-        screen: 'reactDrum.DrumPlayer',
-        title: 'JUCE + React Native'
-      }
-    })
+
+    // setTimeout(() => {
+      Navigation.startSingleScreenApp({
+        screen: {
+          screen: 'reactDrum.DrumPlayer',
+          title: 'JUCE + React Native'
+        }
+      })
+    // }, 1000) 
+
   }
 }
