@@ -208,17 +208,17 @@ private:
     void paintIfFileLoaded (Graphics& g, const Rectangle<int>& thumbnailBounds)
     {
         // TODO: Optimise paint by drawing thumbnail to Image first
-//        g.setColour (thumbnailBackground);
-//        g.fillRoundedRectangle (thumbnailBounds.toFloat(), 5.0f);
-//
-//        g.setColour (thumbnailForeground);                                     // [8]
-//
+        g.setColour (thumbnailBackground);
+        g.fillRoundedRectangle (thumbnailBounds.toFloat(), 5.0f);
+
+        g.setColour (thumbnailForeground);                                     // [8]
+
         const double audioLength (thumbnail.getTotalLength());
-//        thumbnail.drawChannels (g,                                      // [9]
-//                                thumbnailBounds,
-//                                0.0,                                    // start time
-//                                thumbnail.getTotalLength(),             // end time
-//                                1.0f);                                  // vertical zoom
+        thumbnail.drawChannels (g,                                      // [9]
+                                thumbnailBounds,
+                                0.0,                                    // start time
+                                thumbnail.getTotalLength(),             // end time
+                                1.0f);                                  // vertical zoom
         
         g.setColour (audioPositionColour);
         
@@ -246,6 +246,7 @@ private:
     void loadSampleFromName (String name)
     {
         int dataSizeInBytes;
+        name = name.replace(" ", "_");
         const char* filename = BinaryData::getNamedResource (String (name + "_" + String (audioFormatExtension)).toRawUTF8(), dataSizeInBytes);
         
         loadNewSample (filename, dataSizeInBytes, audioFormatExtension);
@@ -261,7 +262,7 @@ private:
         {
             if ((readerSource = new AudioFormatReaderSource (reader, false)))
             {
-                transportSource.setSource (readerSource, 16834, &timeSliceThread, reader->sampleRate);
+                transportSource.setSource (readerSource, 32768, &timeSliceThread, reader->sampleRate);
 //                transportSource.setSource (readerSource, 0, nullptr, reader->sampleRate);
                 playButton.setEnabled (true);
                 thumbnail.setReader (reader.release(), generateHashForSample (data, 128));

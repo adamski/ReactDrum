@@ -143,4 +143,48 @@ JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, attachOpenGLContext, void, (
         app->attachOpenGLContext();
     }
 }
+
+JNIEXPORT jobjectArray JNICALL
+Java_ArrayHandler_returnArray
+        (JNIEnv *env, jobject jobj){
+
+    jobjectArray ret;
+    int i;
+
+    char *message[5]= {"first",
+                       "second",
+                       "third",
+                       "fourth",
+                       "fifth"};
+
+    ret= (jobjectArray)env->NewObjectArray(5,
+                                           env->FindClass("java/lang/String"),
+                                           env->NewStringUTF(""));
+
+    for(i=0;i<5;i++) {
+        env->SetObjectArrayElement(
+                ret,i,env->NewStringUTF(message[i]));
+    }
+    return(ret);
+}
+
+JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, getSampleNames, jobjectArray, (JNIEnv* env, jclass))
+{
+    jobjectArray ret;
+
+    ret = (jobjectArray) env->NewObjectArray(BinaryData::namedResourceListSize,
+                                           env->FindClass("java/lang/String"),
+                                           env->NewStringUTF(""));
+
+    for (int i = 0; i < BinaryData::namedResourceListSize; ++i)
+    {
+        String processedName = BinaryData::namedResourceList[i];
+        processedName = processedName.upToLastOccurrenceOf("_ogg", false, false);
+        processedName = processedName.replace("_", " ");
+        env->SetObjectArrayElement(
+                ret,i,env->NewStringUTF(processedName.toRawUTF8()));
+    }
+
+    return ret;
+}
 #endif
