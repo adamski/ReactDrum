@@ -64,7 +64,6 @@ public class JuceBridge
     private static JuceBridge instance;
     private Map<String, ComponentPeerView> componentPeerViewMap;
     private JuceViewHolder juceViewHolder;
-    private Runnable onAppInitialisedCallback;
 
     private static class Holder {
         static final JuceBridge INSTANCE = new JuceBridge();
@@ -91,22 +90,6 @@ public class JuceBridge
     {
         return hasInitialised();
     }
-
-    public void onAppInitialised (Runnable callback)
-    {
-       onAppInitialisedCallback = callback;
-    }
-
-    public void appInitialisedCallback()
-    {
-        Log.d ("JuceBridge", "Calling appInitialisedCallback if not null");
-        if (onAppInitialisedCallback != null)
-        {
-            Log.d("JuceBridge", "Calling appInitialisedCallback");
-            onAppInitialisedCallback.run();
-        }
-    }
-
     private native boolean hasInitialised();
 
     //==============================================================================

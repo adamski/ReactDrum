@@ -36,12 +36,40 @@ public:
     //==============================================================================
     void initialise (const String& commandLine) override
     {
-        // This method is where you should put your application's initialisation code..
+        ignoreUnused (commandLine);
+        mainComponent = new MainContentComponent();
+
+        AudioDeviceManager::AudioDeviceSetup deviceSetup = AudioDeviceManager::AudioDeviceSetup();
+        deviceSetup.bufferSize = 7168;
+        deviceSetup.sampleRate = 44100;
+//        deviceManager.setAudioDeviceSetup(deviceSetup, true);
+
+//        String err = deviceManager.initialiseWithDefaultDevices (0, 1);
+        String err = deviceManager.initialise(0, 1, nullptr, false, String::empty, &deviceSetup);
+        DBG (err);
+        jassert (err.isEmpty());
+        int bufferSize = deviceManager.getCurrentAudioDevice()->getCurrentBufferSizeSamples();
+        double sampleRate = deviceManager.getCurrentAudioDevice()->getCurrentSampleRate();
+
+        DBG ("bufferSizes:");
+        auto availableBufferSizes = deviceManager.getCurrentAudioDevice()->getAvailableBufferSizes();
+        for (auto bs : availableBufferSizes)
+            DBG (bs);
+
+        DBG ("sampleRates:");
+        auto availableSampleRates = deviceManager.getCurrentAudioDevice()->getAvailableSampleRates();
+        for (auto sr : availableSampleRates)
+                DBG (sr);
+
+        DBG ("bufferSize: " << bufferSize << "; sampleRate: " << sampleRate);
+
+        player.setSource(mainComponent);
+        deviceManager.addAudioCallback(&player);
 
 #if JUCE_ANDROID
         // Set up our windows that will be attached to Android views
         container = new ResizableWindow ("MainComponent", true);
-        container->setContentOwned (new MainContentComponent(), true);
+        container->setContentOwned (mainComponent, true);
         container->setUsingNativeTitleBar (true);
         container->setFullScreen (true);
         container->setVisible (true);
@@ -79,12 +107,21 @@ public:
 #if JUCE_ANDROID
     void attachOpenGLContext()
     {
-        if (! openGLContext.isAttached())
-            openGLContext.attachTo (*container);
+        DBG ("Attaching to OpenGLContext...");
+        if (openGLContext.isAttached())
+        {
+            openGLContext.detach();
+            DBG ("OpenGLContext was already attached");
+        }
+        openGLContext.attachTo (*container);
     }
 #endif
 
 private:
+    AudioDeviceManager deviceManager;
+    AudioSourcePlayer player;
+    ScopedPointer<MainContentComponent> mainComponent;
+
 #if JUCE_ANDROID
     ScopedPointer<ResizableWindow> container;
 #else
