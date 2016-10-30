@@ -5,6 +5,10 @@
               jucerVersion="4.2.4">
   <MAINGROUP id="ZOLEZW" name="ReactDrum">
     <GROUP id="{49A6A868-6004-6CB5-220F-414C754B4F69}" name="iOS">
+      <FILE id="iLFYnb" name="ReactJuceModule.mm" compile="1" resource="0"
+            file="Source/iOS/ReactJuceModule.mm"/>
+      <FILE id="Tz5MXj" name="ReactJuceModule.h" compile="0" resource="0"
+            file="Source/iOS/ReactJuceModule.h"/>
       <FILE id="Vvo7x1" name="ReactJuceView.h" compile="0" resource="0" file="Source/iOS/ReactJuceView.h"/>
       <FILE id="WR9eAM" name="ReactJuceView.mm" compile="1" resource="0"
             file="Source/iOS/ReactJuceView.mm"/>
@@ -149,4 +153,7 @@
     <MODULE id="juce_video" showAllCode="1" useLocalCopy="0"/>
   </MODULES>
   <JUCEOPTIONS/>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
 </JUCERPROJECT>

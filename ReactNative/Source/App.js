@@ -9,24 +9,65 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ListView,
+  TouchableHighlight,
+  NativeModules
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
 import DrumPlayer from './Components/DrumPlayer'
 
-class MainScreen extends Component {
+var ReactJuceModule = NativeModules.ReactJuceModule
+
+class SampleListScreen extends Component {
+  constructor() {
+    super()
+    this.getSampleNames()  
+    this.state = {
+      dataSource: null
+    }
+  }
+
+  async getSampleNames() {
+    const sampleNames = await ReactJuceModule.getSampleNames()
+    console.log(sampleNames)
+
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    this.setState({
+      dataSource: ds.cloneWithRows(sampleNames),
+    })
+  }
+
+  pressRow(sampleName) {
+    ReactJuceModule.selectSample(sampleName)
+    this.props.navigator.toggleDrawer({
+      side: 'left',
+      animated: true,
+      to: 'closed'
+    });
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          This is where our JUCE Component will go! 
-        </Text>
-      </View>
-    );
+    if (this.state.dataSource !== null)
+      return (
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => (
+            <TouchableHighlight 
+              onPress={() => this.pressRow(rowData)} 
+              underlayColor="grey">
+              <View style={styles.rowContainer}>
+                <Text style={styles.title}>{rowData}</Text>
+              </View>
+            </TouchableHighlight>
+          )}
+          renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
+          style={styles.listView}
+        />
+      )
+    else 
+      return <Text>Fetching...</Text>
   }
 }
 
@@ -54,17 +95,21 @@ const styles = StyleSheet.create({
 export default class App {
   constructor() {
 
-    Navigation.registerComponent('reactDrum.MainScreen', () => MainScreen)
+    Navigation.registerComponent('reactDrum.SampleListScreen', () => SampleListScreen)
     Navigation.registerComponent('reactDrum.DrumPlayer', () => DrumPlayer)
 
-    // setTimeout(() => {
-      Navigation.startSingleScreenApp({
-        screen: {
-          screen: 'reactDrum.DrumPlayer',
-          title: 'JUCE + React Native'
-        }
-      })
-    // }, 1000) 
+    Navigation.startSingleScreenApp({
+      screen: {
+        screen: 'reactDrum.DrumPlayer',
+        title: 'JUCE + React Native'
+      },
+      drawer: { // optional, add this if you want a side menu drawer in your app
+        left: { // optional, define if you want a drawer from the left
+          screen: 'reactDrum.SampleListScreen' // unique ID registered with Navigation.registerScreen
+        },
+      }
+    })
+
 
   }
 }

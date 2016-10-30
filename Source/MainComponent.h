@@ -65,6 +65,16 @@ public:
     {
 //        shutdownAudio();
     }
+    
+    void loadSampleFromName (String name)
+    {
+        DBG ("loadSampleFromName: " << name);
+        int dataSizeInBytes;
+        name = name.replace(" ", "_");
+        const char* filename = BinaryData::getNamedResource (String (name + "_" + String (audioFormatExtension)).toRawUTF8(), dataSizeInBytes);
+        
+        loadNewSample (filename, dataSizeInBytes, audioFormatExtension);
+    }
 
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override
     {
@@ -105,7 +115,6 @@ public:
     
     void changeListenerCallback (ChangeBroadcaster* source) override
     {
-        if (source == &transportSource) transportSourceChanged();
         if (source == &thumbnail)       thumbnailChanged();
     }
     
@@ -154,43 +163,6 @@ private:
         repaint();
     }
     
-    void changeState (TransportState newState)
-    {
-        if (state != newState)
-        {
-            state = newState;
-            
-            switch (state)
-            {
-                case Stopped:
-                    playButton.setEnabled (true);
-                    transportSource.setPosition (0.0);
-                    break;
-                    
-                case Starting:
-                    transportSource.stop();
-                    transportSource.setPosition (0.0);
-                    transportSource.start();
-                    break;
-                    
-                case Playing:
-                    break;
-                    
-                case Stopping:
-                    transportSource.stop();
-                    break;
-                    
-                default:
-                    jassertfalse;
-                    break;
-            }
-        }
-    }
-    
-    void transportSourceChanged()
-    {
-        changeState (transportSource.isPlaying() ? Playing : Stopped);
-    }
     
     void thumbnailChanged()
     {
@@ -243,30 +215,34 @@ private:
         return list;
     }
     
-    void loadSampleFromName (String name)
-    {
-        int dataSizeInBytes;
-        name = name.replace(" ", "_");
-        const char* filename = BinaryData::getNamedResource (String (name + "_" + String (audioFormatExtension)).toRawUTF8(), dataSizeInBytes);
-        
-        loadNewSample (filename, dataSizeInBytes, audioFormatExtension);
-    }
+
     
     void loadNewSample (const void* data, int dataSize, const char* format)
     {
+
         MemoryInputStream* soundBuffer = new MemoryInputStream (data, static_cast<std::size_t> (dataSize), false);
         
         ScopedPointer<AudioFormatReader> reader = formatManager.findFormatForFileExtension (format)->createReaderFor (soundBuffer, true);
         
-        if (reader != nullptr)
+        if (reader == nullptr)
         {
-            if ((readerSource = new AudioFormatReaderSource (reader, false)))
+            DBG ("loadNewSample: reader == nullptr");
+            return;
+        }
+        
+        if ((readerSource = new AudioFormatReaderSource (reader, false)))
+        {
+#if JUCE_ANDROID
+            transportSource.setSource (readerSource, 8192, &timeSliceThread, reader->sampleRate);
+#else
+            transportSource.setSource (readerSource, 0, nullptr, reader->sampleRate);
+#endif
+            playButton.setEnabled (true);
             {
-                transportSource.setSource (readerSource, 32768, &timeSliceThread, reader->sampleRate);
-//                transportSource.setSource (readerSource, 0, nullptr, reader->sampleRate);
-                playButton.setEnabled (true);
+                MessageManagerLock mm;
                 thumbnail.setReader (reader.release(), generateHashForSample (data, 128));
             }
+
         }
     }
     
@@ -277,8 +253,9 @@ private:
     
     void playButtonClicked()
     {
-//        keyboardState.noteOn(1, 0x40, 1.0);
-        changeState (Starting);
+        transportSource.stop();
+        transportSource.setPosition (0.0);
+        transportSource.start();
     }
     
     

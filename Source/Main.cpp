@@ -9,11 +9,12 @@
 */
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "MainComponent.h"
+#include "HelperMethods.h"
 
 #if JUCE_IOS
 #include "iOS/MainWindowIOS.h"
 #elif JUCE_ANDROID
-#include "MainComponent.h"
 namespace juce
 {
 #include "../JuceModules/juce_core/native/juce_android_JNIHelpers.h"
@@ -37,15 +38,13 @@ public:
     void initialise (const String& commandLine) override
     {
         ignoreUnused (commandLine);
-        mainComponent = new MainContentComponent();
 
         AudioDeviceManager::AudioDeviceSetup deviceSetup = AudioDeviceManager::AudioDeviceSetup();
         deviceSetup.bufferSize = 7168;
         deviceSetup.sampleRate = 44100;
-//        deviceManager.setAudioDeviceSetup(deviceSetup, true);
 
 //        String err = deviceManager.initialiseWithDefaultDevices (0, 1);
-        String err = deviceManager.initialise(0, 1, nullptr, false, String::empty, &deviceSetup);
+        String err = deviceManager.initialise(0, 2, nullptr, true, String::empty, &deviceSetup);
         DBG (err);
         jassert (err.isEmpty());
         int bufferSize = deviceManager.getCurrentAudioDevice()->getCurrentBufferSizeSamples();
@@ -120,7 +119,7 @@ public:
 private:
     AudioDeviceManager deviceManager;
     AudioSourcePlayer player;
-    ScopedPointer<MainContentComponent> mainComponent;
+    SharedResourcePointer<MainContentComponent> mainComponent;
 
 #if JUCE_ANDROID
     ScopedPointer<ResizableWindow> container;
@@ -144,30 +143,6 @@ JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, attachOpenGLContext, void, (
     }
 }
 
-JNIEXPORT jobjectArray JNICALL
-Java_ArrayHandler_returnArray
-        (JNIEnv *env, jobject jobj){
-
-    jobjectArray ret;
-    int i;
-
-    char *message[5]= {"first",
-                       "second",
-                       "third",
-                       "fourth",
-                       "fifth"};
-
-    ret= (jobjectArray)env->NewObjectArray(5,
-                                           env->FindClass("java/lang/String"),
-                                           env->NewStringUTF(""));
-
-    for(i=0;i<5;i++) {
-        env->SetObjectArrayElement(
-                ret,i,env->NewStringUTF(message[i]));
-    }
-    return(ret);
-}
-
 JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, getSampleNames, jobjectArray, (JNIEnv* env, jclass))
 {
     jobjectArray ret;
@@ -178,9 +153,7 @@ JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, getSampleNames, jobjectArray
 
     for (int i = 0; i < BinaryData::namedResourceListSize; ++i)
     {
-        String processedName = BinaryData::namedResourceList[i];
-        processedName = processedName.upToLastOccurrenceOf("_ogg", false, false);
-        processedName = processedName.replace("_", " ");
+        String processedName = HelperMethods::getSampleNameFromFilename (BinaryData::namedResourceList[i]);
         env->SetObjectArrayElement(
                 ret,i,env->NewStringUTF(processedName.toRawUTF8()));
     }

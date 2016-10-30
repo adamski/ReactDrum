@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start --root ./ReactNative"
+    "start": "node node_modules/react-native/local-cli/cli.js start --root ./ReactNative",
+    "start-8082": "node node_modules/react-native/local-cli/cli.js start --root ./ReactNative --port 8082"
   },
   "dependencies": {
     "react": "15.2.1",

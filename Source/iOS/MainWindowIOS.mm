@@ -46,7 +46,7 @@ MainWindow::MainWindow (String name)  : DocumentWindow (name,
      */
     
 #if JUCE_DEBUG
-    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8082/index.ios.bundle?platform=ios&dev=true"];
 #else
     /**
      * OPTION 2
