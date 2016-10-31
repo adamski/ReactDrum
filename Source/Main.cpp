@@ -120,6 +120,7 @@ public:
 
 private:
     SharedResourcePointer<AudioDeviceManager> deviceManager;
+    SharedResourcePointer<MainContentComponent> mainComponent;
 
 #if JUCE_ANDROID
     ScopedPointer<ResizableWindow> container;

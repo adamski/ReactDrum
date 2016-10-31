@@ -222,6 +222,8 @@ private:
     
     void loadNewSample (const void* data, int dataSize, const char* format)
     {
+        MessageManagerLock mm;
+        
         transportSource.stop();
         
         playButton.setEnabled (false);
@@ -240,17 +242,13 @@ private:
 #if JUCE_ANDROID
             transportSource.setSource (readerSource, 8192, &timeSliceThread, reader->sampleRate);
 #else
+            
             transportSource.setSource (readerSource, 0, nullptr, reader->sampleRate);
 #endif
-
-            transportSource.setPosition(0.0);
+            thumbnail.setReader (reader.release(), generateHashForSample (data, 128));
             playButton.setEnabled (true);
+            transportSource.setPosition(0.0);
             
-//            {
-//                MessageManagerLock mm;
-                thumbnail.setReader (reader.release(), generateHashForSample (data, 128));
-//            }
-
         }
     }
     
@@ -261,11 +259,9 @@ private:
     
     void playButtonClicked()
     {
-        DBG ("play button clicked");
         transportSource.stop();
         transportSource.setPosition (0.0);
         transportSource.start();
-        
     }
     
     
