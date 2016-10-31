@@ -39,35 +39,33 @@ public:
     {
         ignoreUnused (commandLine);
 
+#if JUCE_ANDROID 
+        // For the Android emulator to be as smooth as possible we set it to its max bufferSize
         AudioDeviceManager::AudioDeviceSetup deviceSetup = AudioDeviceManager::AudioDeviceSetup();
         deviceSetup.bufferSize = 7168;
         deviceSetup.sampleRate = 44100;
-
-#if JUCE_ANDROID
-        String err = deviceManager.initialise(0, 2, nullptr, true, String::empty, &deviceSetup);
+        String err = deviceManager.initialise(0, 1, nullptr, true, String::empty, &deviceSetup);
 #else
-        String err = deviceManager.initialiseWithDefaultDevices (0, 2);
+        String err = deviceManager->initialiseWithDefaultDevices (0, 1);
 #endif
-        
         DBG (err);
         jassert (err.isEmpty());
-        int bufferSize = deviceManager.getCurrentAudioDevice()->getCurrentBufferSizeSamples();
-        double sampleRate = deviceManager.getCurrentAudioDevice()->getCurrentSampleRate();
+        int bufferSize = deviceManager->getCurrentAudioDevice()->getCurrentBufferSizeSamples();
+        double sampleRate = deviceManager->getCurrentAudioDevice()->getCurrentSampleRate();
 
         DBG ("bufferSizes:");
-        auto availableBufferSizes = deviceManager.getCurrentAudioDevice()->getAvailableBufferSizes();
+        auto availableBufferSizes = deviceManager->getCurrentAudioDevice()->getAvailableBufferSizes();
         for (auto bs : availableBufferSizes)
             DBG (bs);
 
         DBG ("sampleRates:");
-        auto availableSampleRates = deviceManager.getCurrentAudioDevice()->getAvailableSampleRates();
+        auto availableSampleRates = deviceManager->getCurrentAudioDevice()->getAvailableSampleRates();
         for (auto sr : availableSampleRates)
                 DBG (sr);
 
         DBG ("bufferSize: " << bufferSize << "; sampleRate: " << sampleRate);
 
-        player.setSource(mainComponent);
-        deviceManager.addAudioCallback(&player);
+
 
 #if JUCE_ANDROID
         // Set up our windows that will be attached to Android views
@@ -121,9 +119,7 @@ public:
 #endif
 
 private:
-    AudioDeviceManager deviceManager;
-    AudioSourcePlayer player;
-    SharedResourcePointer<MainContentComponent> mainComponent;
+    SharedResourcePointer<AudioDeviceManager> deviceManager;
 
 #if JUCE_ANDROID
     ScopedPointer<ResizableWindow> container;

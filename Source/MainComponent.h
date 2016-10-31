@@ -43,6 +43,7 @@ public:
         
         formatManager.registerBasicFormats();
         transportSource.addChangeListener (this);
+        transportSource.setGain(0.99);
         thumbnail.addChangeListener (this);
 
         // TODO: Below to make into React logo ?
@@ -59,7 +60,11 @@ public:
 #if JUCE_ANDROID
         timeSliceThread.startThread(9);
 #endif
-        startTimerHz (30);
+        
+        player.setSource(this);
+        deviceManager->addAudioCallback(&player);
+        
+        startTimerHz (25);
     }
     
     ~MainContentComponent()
@@ -217,7 +222,6 @@ private:
     
     void loadNewSample (const void* data, int dataSize, const char* format)
     {
-
         transportSource.stop();
         
         playButton.setEnabled (false);
@@ -242,10 +246,10 @@ private:
             transportSource.setPosition(0.0);
             playButton.setEnabled (true);
             
-            {
-                MessageManagerLock mm;
+//            {
+//                MessageManagerLock mm;
                 thumbnail.setReader (reader.release(), generateHashForSample (data, 128));
-            }
+//            }
 
         }
     }
@@ -257,9 +261,11 @@ private:
     
     void playButtonClicked()
     {
+        DBG ("play button clicked");
         transportSource.stop();
         transportSource.setPosition (0.0);
         transportSource.start();
+        
     }
     
     
@@ -277,6 +283,8 @@ private:
 
 //    AudioProcessorPlayer& player;
 //    MidiKeyboardState keyboardState;
+    SharedResourcePointer<AudioDeviceManager> deviceManager;
+    AudioSourcePlayer player;
 
     LookAndFeel_V3 lookAndFeel;
     Colour thumbnailBackground, thumbnailForeground, audioPositionColour;

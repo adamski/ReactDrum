@@ -24,7 +24,7 @@
                                                     DocumentWindow::allButtons)
         {
             setUsingNativeTitleBar (true);
-            setContentOwned (createMainContentComponent(), true);
+            setContentOwned (mainComponent, true);
             setResizable (true, true);
 
             centreWithSize (getWidth(), getHeight());
@@ -48,6 +48,8 @@
 
     private:
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainWindow)
+        
+        SharedResourcePointer<MainContentComponent> mainComponent;
     };
 
 
