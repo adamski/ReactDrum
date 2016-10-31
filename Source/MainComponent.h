@@ -20,8 +20,7 @@ class MainContentComponent   : public Component,
 {
 public:
     MainContentComponent ()
-            : state (Stopped),
-              timeSliceThread ("Player Thread"),
+            : timeSliceThread ("Player Thread"),
               thumbnailCache (5),
               thumbnail (512, formatManager, thumbnailCache),
               thumbnailBackground (Colours::white),
@@ -57,8 +56,10 @@ public:
 
         loadSampleFromName ("Chhhhaah");
 
+#if JUCE_ANDROID
         timeSliceThread.startThread(9);
-        startTimerHz (25);
+#endif
+        startTimerHz (30);
     }
     
     ~MainContentComponent()
@@ -116,6 +117,11 @@ public:
     void changeListenerCallback (ChangeBroadcaster* source) override
     {
         if (source == &thumbnail)       thumbnailChanged();
+        if (source == &transportSource)
+        {
+            DBG ("isPlaying " << transportSource.isPlaying());
+            DBG ("postion " << transportSource.getCurrentPosition());
+        }
     }
     
     void buttonClicked (Button* button) override
@@ -150,14 +156,6 @@ public:
     }
     
 private:
-    enum TransportState
-    {
-        Stopped,
-        Starting,
-        Playing,
-        Stopping
-    };
-    
     void timerCallback() override
     {
         repaint();
@@ -220,6 +218,9 @@ private:
     void loadNewSample (const void* data, int dataSize, const char* format)
     {
 
+        transportSource.stop();
+        
+        playButton.setEnabled (false);
         MemoryInputStream* soundBuffer = new MemoryInputStream (data, static_cast<std::size_t> (dataSize), false);
         
         ScopedPointer<AudioFormatReader> reader = formatManager.findFormatForFileExtension (format)->createReaderFor (soundBuffer, true);
@@ -237,7 +238,10 @@ private:
 #else
             transportSource.setSource (readerSource, 0, nullptr, reader->sampleRate);
 #endif
+
+            transportSource.setPosition(0.0);
             playButton.setEnabled (true);
+            
             {
                 MessageManagerLock mm;
                 thumbnail.setReader (reader.release(), generateHashForSample (data, 128));
@@ -267,7 +271,6 @@ private:
     ScopedPointer<AudioFormatReader> formatReader;
     AudioTransportSource transportSource;
     HashMap<String, String> sampleHashMap;
-    TransportState state;
     AudioThumbnailCache thumbnailCache;                  // [1]
     AudioThumbnail thumbnail;                            // [2]
     TimeSliceThread timeSliceThread;

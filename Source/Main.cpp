@@ -43,8 +43,12 @@ public:
         deviceSetup.bufferSize = 7168;
         deviceSetup.sampleRate = 44100;
 
-//        String err = deviceManager.initialiseWithDefaultDevices (0, 1);
+#if JUCE_ANDROID
         String err = deviceManager.initialise(0, 2, nullptr, true, String::empty, &deviceSetup);
+#else
+        String err = deviceManager.initialiseWithDefaultDevices (0, 2);
+#endif
+        
         DBG (err);
         jassert (err.isEmpty());
         int bufferSize = deviceManager.getCurrentAudioDevice()->getCurrentBufferSizeSamples();
