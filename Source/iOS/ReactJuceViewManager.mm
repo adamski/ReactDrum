@@ -7,7 +7,7 @@
 //
 
 #import "ReactJuceViewManager.h"
-#import "ReactJuceView.h"
+#import "ReactDrumView.h"
 
 #include "../MainComponent.h"  // This could be any other component you wish to use
 
@@ -15,7 +15,12 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_VIEW_PROPERTY(dummy, NSString)
+//RCT_EXPORT_VIEW_PROPERTY(sampleName, NSString)
+
+RCT_CUSTOM_VIEW_PROPERTY(sampleName, NSString, ReactDrumView)
+{
+    [view selectSample:([RCTConvert NSString:json])];
+}
 
 - (UIView *)view
 {
@@ -23,7 +28,7 @@ RCT_EXPORT_VIEW_PROPERTY(dummy, NSString)
 //    SharedResourcePointer<MainContentComponent> mainComponent;
     // do stuff with view properties e.g. mainComponent->setPlayButtonColour(<#juce::String colourString#>)
     
-    return [[ReactJuceView alloc] initWithJuceComponent:mainComponent];
+    return [[ReactDrumView alloc] initWithJuceComponent:mainComponent];
 }
 
 @end

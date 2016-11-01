@@ -16,6 +16,4 @@
 @interface ReactJuceModule : NSObject <RCTBridgeModule>
 @end
 
-
-
 #endif  // REACTJUCEMODULE_H_INCLUDED

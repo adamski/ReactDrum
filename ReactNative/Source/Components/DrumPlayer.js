@@ -65,12 +65,18 @@ class JuceComponent extends React.Component {
   }
 
   render() {
-    return <ReactJuceView {...this.props} key="ReactJuceView"/>
+    return <ReactJuceView {...this.props} key="ReactJuceView" ref="ReactJuceView"/>
   }
 }
 
 
 class DrumPlayer extends Component {
+  constructor() {
+    super()
+    this.state = {
+      sampleName: "Roll"
+    }
+  }
 
   componentWillMount() {
     // ScaleController.updateScaleFromJSON (JSON.stringify (scaleStore.currentScale.scale))
@@ -93,7 +99,7 @@ class DrumPlayer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <JuceComponent style={{flex: 1}} onPressModalButton={this.showModal} key="JuceComponent"/>
+        <JuceComponent style={{flex: 1}} onPressModalButton={this.showModal} sampleName={this.state.sampleName} ref="JuceComp" key="JuceComponent"/>
       </View>
     )
   }
