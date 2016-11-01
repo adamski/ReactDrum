@@ -20,8 +20,8 @@ class MainContentComponent   : public Component,
 {
 public:
     MainContentComponent ()
-            : timeSliceThread ("Player Thread"),
-              thumbnailCache (5),
+//            : timeSliceThread ("Player Thread"),
+            : thumbnailCache (5),
               thumbnail (512, formatManager, thumbnailCache),
               thumbnailBackground (Colours::white),
               thumbnailForeground (Colours::grey),
@@ -42,9 +42,11 @@ public:
         setSize (600, 400);
         
         formatManager.registerBasicFormats();
-        transportSource.addChangeListener (this);
-        transportSource.setGain(0.99);
-        thumbnail.addChangeListener (this);
+//        transportSource.addChangeListener (this);
+#if JUCE_IOS
+        transportSource.setGain(0.8);
+#endif
+//        thumbnail.addChangeListener (this);
 
         // TODO: Below to make into React logo ?
 //        Path proAudioPath;
@@ -57,9 +59,9 @@ public:
 
         loadSampleFromName ("Chhhhaah");
 
-#if JUCE_ANDROID
-        timeSliceThread.startThread(9);
-#endif
+//#if JUCE_ANDROID
+//        timeSliceThread.startThread(9);
+//#endif
         
         player.setSource(this);
         deviceManager->addAudioCallback(&player);
@@ -222,15 +224,21 @@ private:
     
     void loadNewSample (const void* data, int dataSize, const char* format)
     {
+        DBG ("loadNewSample");
+#if JUCE_IOS
         MessageManagerLock mm;
-        
+        DBG ("MessageManagerLock");
+#endif
+
         transportSource.stop();
-        
-        playButton.setEnabled (false);
+        DBG ("transportSource.stop()");
+
         MemoryInputStream* soundBuffer = new MemoryInputStream (data, static_cast<std::size_t> (dataSize), false);
-        
+        DBG ("soundBuffer");
+
         ScopedPointer<AudioFormatReader> reader = formatManager.findFormatForFileExtension (format)->createReaderFor (soundBuffer, true);
-        
+        DBG ("got new reader");
+
         if (reader == nullptr)
         {
             DBG ("loadNewSample: reader == nullptr");
@@ -239,16 +247,22 @@ private:
         
         if ((readerSource = new AudioFormatReaderSource (reader, false)))
         {
-#if JUCE_ANDROID
-            transportSource.setSource (readerSource, 8192, &timeSliceThread, reader->sampleRate);
-#else
+//#if JUCE_ANDROID
+////            MessageManagerLock mm;
+////            DBG ("MessageManagerLock");
+//            DBG ("Aboout to set new readerSource...");
+//            transportSource.setSource (readerSource, 8192, &timeSliceThread, reader->sampleRate);
+//#else
             
             transportSource.setSource (readerSource, 0, nullptr, reader->sampleRate);
-#endif
+//#endif
+            DBG ("Aboout to set new thumbnail reader");
             thumbnail.setReader (reader.release(), generateHashForSample (data, 128));
+            DBG ("Aboout to playButton.setEnabled");
             playButton.setEnabled (true);
+            DBG ("Aboout to setPosition(0.0");
             transportSource.setPosition(0.0);
-            
+            thumbnailChanged();
         }
     }
     
@@ -275,7 +289,7 @@ private:
     HashMap<String, String> sampleHashMap;
     AudioThumbnailCache thumbnailCache;                  // [1]
     AudioThumbnail thumbnail;                            // [2]
-    TimeSliceThread timeSliceThread;
+//    TimeSliceThread timeSliceThread;
 
 //    AudioProcessorPlayer& player;
 //    MidiKeyboardState keyboardState;

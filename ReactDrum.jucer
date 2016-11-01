@@ -50,6 +50,7 @@
             file="BinaryData/thisWorld end.ogg"/>
     </GROUP>
     <GROUP id="{79FDD44B-9F03-E559-87A7-C5A1AEC0343D}" name="Source">
+      <FILE id="pMIGnj" name="HelperMethods.h" compile="0" resource="0" file="Source/HelperMethods.h"/>
       <FILE id="JBKArC" name="MainWindow.h" compile="0" resource="0" file="Source/MainWindow.h"/>
       <FILE id="WtVKth" name="MainComponent.h" compile="1" resource="0" file="Source/MainComponent.h"/>
       <FILE id="kHHxpu" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
@@ -114,8 +115,8 @@
                    androidPackagingOptions="" androidApplicationClass="MainApplication"
                    androidTheme="@style/Theme.AppCompat.NoActionBar">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" androidArchitectures="armeabi armeabi-v7a x86" isDebug="0"
-                       optimisation="3" targetName="ReactDrum"/>
+        <CONFIGURATION name="Debug" androidArchitectures="armeabi armeabi-v7a x86" isDebug="1"
+                       optimisation="1" targetName="ReactDrum"/>
         <CONFIGURATION name="Release" androidArchitectures="armeabi armeabi-v7a x86"
                        isDebug="0" optimisation="3" targetName="ReactDrum"/>
       </CONFIGURATIONS>

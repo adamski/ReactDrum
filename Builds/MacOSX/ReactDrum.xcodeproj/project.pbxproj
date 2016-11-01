@@ -176,6 +176,7 @@
 		1BAA0D9C353B198A03E5D6D7 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "juce_InputStream.cpp"; path = "../../JUCE/modules/juce_core/streams/juce_InputStream.cpp"; sourceTree = "SOURCE_ROOT"; };
 		1BB88B7CF79D9FA83FEE9767 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_ResizableBorderComponent.h"; path = "../../JUCE/modules/juce_gui_basics/layout/juce_ResizableBorderComponent.h"; sourceTree = "SOURCE_ROOT"; };
 		1BBE732A1C352DD6A9E83C23 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "juce_TooltipClient.h"; path = "../../JUCE/modules/juce_gui_basics/mouse/juce_TooltipClient.h"; sourceTree = "SOURCE_ROOT"; };
+		1BFB2C7D04F15DF3D7EFE2D4 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HelperMethods.h; path = ../../Source/HelperMethods.h; sourceTree = "SOURCE_ROOT"; };
 		1C07F8541CC2A130CDE59D9A = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = compress.c; path = "../../JUCE/modules/juce_core/zip/zlib/compress.c"; sourceTree = "SOURCE_ROOT"; };
 		1C29D106605CC51A76D8B66A = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = vorbisenc.c; path = "../../JUCE/modules/juce_audio_formats/codecs/oggvorbis/libvorbis-1.3.2/lib/vorbisenc.c"; sourceTree = "SOURCE_ROOT"; };
 		1C6F23E3F644286FE76734A1 = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "juce_Component.cpp"; path = "../../JUCE/modules/juce_gui_basics/components/juce_Component.cpp"; sourceTree = "SOURCE_ROOT"; };
@@ -1294,6 +1295,7 @@
 					397E7C90ACFC17776626DA5D,
 					8F49143B97CE94F04594DA11, ); name = BinaryData; sourceTree = "<group>"; };
 		AD6322C2DC8E5DB8D89CE1A5 = {isa = PBXGroup; children = (
+					1BFB2C7D04F15DF3D7EFE2D4,
 					4235B240B212789207A49210,
 					BD1821A4943A8921AE9445CE,
 					5C9BD0926D13A5BF0797707D, ); name = Source; sourceTree = "<group>"; };

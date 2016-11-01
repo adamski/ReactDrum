@@ -44,9 +44,9 @@ public:
         AudioDeviceManager::AudioDeviceSetup deviceSetup = AudioDeviceManager::AudioDeviceSetup();
         deviceSetup.bufferSize = 7168;
         deviceSetup.sampleRate = 44100;
-        String err = deviceManager.initialise(0, 1, nullptr, true, String::empty, &deviceSetup);
+        String err = deviceManager->initialise(0, 2, nullptr, true, String::empty, &deviceSetup);
 #else
-        String err = deviceManager->initialiseWithDefaultDevices (0, 1);
+        String err = deviceManager->initialiseWithDefaultDevices (0, 2);
 #endif
         DBG (err);
         jassert (err.isEmpty());
@@ -161,4 +161,21 @@ JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, getSampleNames, jobjectArray
 
     return ret;
 }
+
+JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, selectSample, void, (JNIEnv* env, jclass, jstring sampleNameJavaString))
+{
+    SharedResourcePointer<MainContentComponent> mainComponent;
+    jassert (mainComponent != nullptr);
+
+    if (sampleNameJavaString != nullptr) {
+        const char *sampleName = (env)->GetStringUTFChars (sampleNameJavaString, NULL);
+        mainComponent->loadSampleFromName(sampleName);
+    }
+    else
+    {
+        Logger::writeToLog("Null string sent to selectSample");
+        // TODO: Notify user; JS callback or JUCE MessageDialog
+    }
+}
+
 #endif

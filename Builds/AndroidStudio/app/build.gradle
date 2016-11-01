@@ -41,10 +41,12 @@ model {
     }
     android.buildTypes {
         debug {
-            signingConfig = $("android.signingConfigs.releaseConfig")
             ndk.with {
-                cppFlags.add("-DNDEBUG=1")
-                cppFlags.add("-O3")
+                debuggable = true
+                cppFlags.add("-g")
+                cppFlags.add("-DDEBUG=1")
+                cppFlags.add("-D_DEBUG=1")
+                cppFlags.add("-O0")
                 cppFlags.add("-I${project.rootDir}/../../JuceLibraryCode".toString())
                 cppFlags.add("-I${project.rootDir}/../../JUCE/modules".toString())
                 cppFlags.add("-DJUCE_ANDROID=1")
