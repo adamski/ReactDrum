@@ -117,10 +117,15 @@ public:
         openGLContext.attachTo (*container);
     }
 #endif
+    
+    MainContentComponent* getMainComponent()
+    {
+        return mainComponent.get();
+    }
 
 private:
     SharedResourcePointer<AudioDeviceManager> deviceManager;
-    SharedResourcePointer<MainContentComponent> mainComponent;
+    ScopedPointer<MainContentComponent> mainComponent;
 
 #if JUCE_ANDROID
     ScopedPointer<ResizableWindow> container;
@@ -164,17 +169,20 @@ JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, getSampleNames, jobjectArray
 
 JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, selectSample, void, (JNIEnv* env, jclass, jstring sampleNameJavaString))
 {
-    SharedResourcePointer<MainContentComponent> mainComponent;
-    jassert (mainComponent != nullptr);
-
-    if (sampleNameJavaString != nullptr) {
-        const char *sampleName = (env)->GetStringUTFChars (sampleNameJavaString, NULL);
-        mainComponent->loadSampleFromName(sampleName);
-    }
-    else
+    ReactDrumApplication* const app = dynamic_cast<ReactDrumApplication*> (JUCEApplication::getInstance());
+    if (app != nullptr)
     {
-        Logger::writeToLog("Null string sent to selectSample");
-        // TODO: Notify user; JS callback or JUCE MessageDialog
+        jassert (app->getMainComponent() != nullptr);
+        
+        if (sampleNameJavaString != nullptr) {
+            const char *sampleName = (env)->GetStringUTFChars (sampleNameJavaString, NULL);
+            app->mainComponent->loadSampleFromName(sampleName);
+        }
+        else
+        {
+            Logger::writeToLog("Null string sent to selectSample");
+            // TODO: Notify user; JS callback or JUCE MessageDialog
+        }
     }
 }
 

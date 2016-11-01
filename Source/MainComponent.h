@@ -28,8 +28,6 @@ public:
               audioPositionColour (Colours::green),
               backgroundColour (Colours::lightcoral)
     {
-//        keyboardState.addListener (&processorPlayer.getMidiMessageCollector());
-
         setLookAndFeel (&lookAndFeel);
         
         addAndMakeVisible (&playButton);
@@ -44,7 +42,7 @@ public:
         formatManager.registerBasicFormats();
 //        transportSource.addChangeListener (this);
 #if JUCE_IOS
-        transportSource.setGain(0.8);
+        transportSource.setGain(0.6);
 #endif
 //        thumbnail.addChangeListener (this);
 
@@ -72,6 +70,8 @@ public:
     ~MainContentComponent()
     {
 //        shutdownAudio();
+        DBG ("destructor called");
+        deviceManager->removeAudioCallback(&player);
     }
     
     void loadSampleFromName (String name)

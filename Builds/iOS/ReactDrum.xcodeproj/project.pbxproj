@@ -10,7 +10,6 @@
 		0156E09576CDF7FA35252D09 /* juce_audio_formats.mm in Sources */ = {isa = PBXBuildFile; fileRef = 53EAEAA259FFA4121E57B5CB /* juce_audio_formats.mm */; };
 		183C89367B801DB98F6E60FE /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FD5CD81C54E1EDFD34F372 /* CoreAudio.framework */; };
 		1A34E91368E831B597A5CC30 /* juce_video.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2D851B49B12F4C1B5CDBE6E6 /* juce_video.mm */; };
-		46730C550F2E34CCC6B9776E /* libPods-ReactDrum (App).a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BBE3E1FCD25C55082DD8D3 /* libPods-ReactDrum (App).a */; };
 		4DB9653025C026377C730981 /* juce_audio_devices.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4571377CFC85ED92E475C758 /* juce_audio_devices.mm */; };
 		5227C51B20AAC7E662D132AD /* juce_audio_basics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F16E02148BEF1FBB7A5BFBB /* juce_audio_basics.mm */; };
 		586CDEED5BAB218F0D616065 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BD0926D13A5BF0797707D /* Main.cpp */; };
@@ -42,6 +41,7 @@
 		DD98204A17C17A63A8E078E3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0701B18F8080F2724DE303E5 /* OpenGLES.framework */; };
 		E3F287C8260D25ECD6277A0A /* ReactJuceViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04A6A65E275F8038944E9181 /* ReactJuceViewManager.mm */; };
 		EBA282384E7C6B6E66E0C448 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36602F0E635FDA2C53AD4ABF /* Accelerate.framework */; };
+		FB9079307B65AACA84A0BADA /* libPods-ReactDrum (App).a in Frameworks */ = {isa = PBXBuildFile; fileRef = 50AA18F986F29FEC1582D99B /* libPods-ReactDrum (App).a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,11 +81,11 @@
 		07A820E6B42E738E3847616E /* juce_GraphicsContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_GraphicsContext.h; path = ../../JUCE/modules/juce_graphics/contexts/juce_GraphicsContext.h; sourceTree = SOURCE_ROOT; };
 		07B4F76773974A9A191F4AE3 /* juce_SystemClipboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_SystemClipboard.h; path = ../../JUCE/modules/juce_gui_basics/keyboard/juce_SystemClipboard.h; sourceTree = SOURCE_ROOT; };
 		087C696D079CFF7A4E9A3036 /* jcdctmgr.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = jcdctmgr.c; path = ../../JUCE/modules/juce_graphics/image_formats/jpglib/jcdctmgr.c; sourceTree = SOURCE_ROOT; };
+		08E1E4E4DF2126E10CB17F2F /* Pods-ReactDrum (App).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactDrum (App).debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactDrum (App)/Pods-ReactDrum (App).debug.xcconfig"; sourceTree = "<group>"; };
 		08E31546D747779B913D6CAC /* juce_ContainerDeletePolicy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ContainerDeletePolicy.h; path = ../../JUCE/modules/juce_core/memory/juce_ContainerDeletePolicy.h; sourceTree = SOURCE_ROOT; };
 		08E95915E76162FA57FE766B /* juce_Reverb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_Reverb.h; path = ../../JUCE/modules/juce_audio_basics/effects/juce_Reverb.h; sourceTree = SOURCE_ROOT; };
 		0937381C451BA7C01DBD8D84 /* juce_PathIterator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_PathIterator.h; path = ../../JUCE/modules/juce_graphics/geometry/juce_PathIterator.h; sourceTree = SOURCE_ROOT; };
 		09949D4A01E3127A6F5AEA66 /* juce_ComponentListener.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_ComponentListener.cpp; path = ../../JUCE/modules/juce_gui_basics/components/juce_ComponentListener.cpp; sourceTree = SOURCE_ROOT; };
-		09BBE3E1FCD25C55082DD8D3 /* libPods-ReactDrum (App).a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactDrum (App).a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E50056153570149E4F845C /* juce_win32_ASIO.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_win32_ASIO.cpp; path = ../../JUCE/modules/juce_audio_devices/native/juce_win32_ASIO.cpp; sourceTree = SOURCE_ROOT; };
 		09F88835185091C04278342E /* juce_MixerAudioSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_MixerAudioSource.h; path = ../../JUCE/modules/juce_audio_basics/sources/juce_MixerAudioSource.h; sourceTree = SOURCE_ROOT; };
 		0A174785D32F49EE1800B3AE /* juce_OpenGLTexture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_OpenGLTexture.cpp; path = ../../JUCE/modules/juce_opengl/opengl/juce_OpenGLTexture.cpp; sourceTree = SOURCE_ROOT; };
@@ -352,7 +352,6 @@
 		3C25258F513948DA1EAD8095 /* juce_RecentlyOpenedFilesList.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_RecentlyOpenedFilesList.cpp; path = ../../JUCE/modules/juce_gui_extra/misc/juce_RecentlyOpenedFilesList.cpp; sourceTree = SOURCE_ROOT; };
 		3C3ACD7B6F93613814C75157 /* juce_data_structures.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_data_structures.mm; path = ../../JuceLibraryCode/juce_data_structures.mm; sourceTree = SOURCE_ROOT; };
 		3C3B9E3519770E53C133B58A /* juce_Socket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_Socket.cpp; path = ../../JUCE/modules/juce_core/network/juce_Socket.cpp; sourceTree = SOURCE_ROOT; };
-		3CD41769373BCFBD98A408D3 /* Pods-ReactDrum (App).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactDrum (App).release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactDrum (App)/Pods-ReactDrum (App).release.xcconfig"; sourceTree = "<group>"; };
 		3CF7CAE5E70C70C936FA190E /* juce_CachedValue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_CachedValue.cpp; path = ../../JUCE/modules/juce_data_structures/values/juce_CachedValue.cpp; sourceTree = SOURCE_ROOT; };
 		3CF90A433109D017F617AD28 /* juce_mac_QuickTimeMovieComponent.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_mac_QuickTimeMovieComponent.mm; path = ../../JUCE/modules/juce_video/native/juce_mac_QuickTimeMovieComponent.mm; sourceTree = SOURCE_ROOT; };
 		3D715FDB7E5E25D3BFE11EFC /* juce_Range.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_Range.h; path = ../../JUCE/modules/juce_core/maths/juce_Range.h; sourceTree = SOURCE_ROOT; };
@@ -457,6 +456,7 @@
 		50987CAC7525D95F4B756016 /* inflate.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = inflate.c; path = ../../JUCE/modules/juce_core/zip/zlib/inflate.c; sourceTree = SOURCE_ROOT; };
 		5099FF4816308045397C055E /* juce_SubregionStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_SubregionStream.cpp; path = ../../JUCE/modules/juce_core/streams/juce_SubregionStream.cpp; sourceTree = SOURCE_ROOT; };
 		50A0FB6FF4DBD8601D6F4962 /* pnginfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pnginfo.h; path = ../../JUCE/modules/juce_graphics/image_formats/pnglib/pnginfo.h; sourceTree = SOURCE_ROOT; };
+		50AA18F986F29FEC1582D99B /* libPods-ReactDrum (App).a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactDrum (App).a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50F706D2DD1273333AC12F04 /* juce_ResizableWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_ResizableWindow.h; path = ../../JUCE/modules/juce_gui_basics/windows/juce_ResizableWindow.h; sourceTree = SOURCE_ROOT; };
 		51E09048A50CED67CBC0502E /* juce_MPESynthesiserBase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_MPESynthesiserBase.cpp; path = ../../JUCE/modules/juce_audio_basics/mpe/juce_MPESynthesiserBase.cpp; sourceTree = SOURCE_ROOT; };
 		52173C5A0D4DCC182ED5A174 /* juce_android_Midi.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_android_Midi.cpp; path = ../../JUCE/modules/juce_audio_devices/native/juce_android_Midi.cpp; sourceTree = SOURCE_ROOT; };
@@ -518,7 +518,6 @@
 		5C1C3795D8FF182DC4D9EE5D /* juce_OpenGL_win32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_OpenGL_win32.h; path = ../../JUCE/modules/juce_opengl/native/juce_OpenGL_win32.h; sourceTree = SOURCE_ROOT; };
 		5C9BD0926D13A5BF0797707D /* Main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../../Source/Main.cpp; sourceTree = SOURCE_ROOT; };
 		5CE820ACC4D77AF1E2510FBE /* juce_TabbedButtonBar.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_TabbedButtonBar.cpp; path = ../../JUCE/modules/juce_gui_basics/layout/juce_TabbedButtonBar.cpp; sourceTree = SOURCE_ROOT; };
-		5D9490E235CF6BE40048053F /* Pods-ReactDrum (App).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactDrum (App).debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactDrum (App)/Pods-ReactDrum (App).debug.xcconfig"; sourceTree = "<group>"; };
 		5E07CF24759968B91C18A661 /* setup_22.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = setup_22.h; path = "../../JUCE/modules/juce_audio_formats/codecs/oggvorbis/libvorbis-1.3.2/lib/modes/setup_22.h"; sourceTree = SOURCE_ROOT; };
 		5E32D8A41E42780051A7A451 /* juce_IIRFilterAudioSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_IIRFilterAudioSource.h; path = ../../JUCE/modules/juce_audio_basics/sources/juce_IIRFilterAudioSource.h; sourceTree = SOURCE_ROOT; };
 		5EFB7EBB1390541EE3AA9B1B /* juce_mac_CameraDevice.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_mac_CameraDevice.mm; path = ../../JUCE/modules/juce_video/native/juce_mac_CameraDevice.mm; sourceTree = SOURCE_ROOT; };
@@ -1252,6 +1251,7 @@
 		FA731AEF81EA16931C303D21 /* juce_WildcardFileFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_WildcardFileFilter.cpp; path = ../../JUCE/modules/juce_core/files/juce_WildcardFileFilter.cpp; sourceTree = SOURCE_ROOT; };
 		FA8296722AF86C9F3A70D4AC /* juce_MountedVolumeListChangeDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_MountedVolumeListChangeDetector.h; path = ../../JUCE/modules/juce_events/messages/juce_MountedVolumeListChangeDetector.h; sourceTree = SOURCE_ROOT; };
 		FA8C5145FF22699D74CD29DA /* juce_Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_Logger.h; path = ../../JUCE/modules/juce_core/logging/juce_Logger.h; sourceTree = SOURCE_ROOT; };
+		FABE980E9B74F87CD8C60230 /* Pods-ReactDrum (App).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactDrum (App).release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactDrum (App)/Pods-ReactDrum (App).release.xcconfig"; sourceTree = "<group>"; };
 		FAE46A36D737C61ABFAF781B /* juce_WavAudioFormat.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_WavAudioFormat.cpp; path = ../../JUCE/modules/juce_audio_formats/codecs/juce_WavAudioFormat.cpp; sourceTree = SOURCE_ROOT; };
 		FB16D97A1CCEB4D186266ED4 /* juce_BasicNativeHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = juce_BasicNativeHeaders.h; path = ../../JUCE/modules/juce_core/native/juce_BasicNativeHeaders.h; sourceTree = SOURCE_ROOT; };
 		FB40046FFD3B2ADB24D2B684 /* juce_audio_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = juce_audio_utils.mm; path = ../../JUCE/modules/juce_audio_utils/juce_audio_utils.mm; sourceTree = SOURCE_ROOT; };
@@ -1290,7 +1290,7 @@
 				DD98204A17C17A63A8E078E3 /* OpenGLES.framework in Frameworks */,
 				5FE78AB93FB3D4C00C630E40 /* QuartzCore.framework in Frameworks */,
 				73DE903C3D344C93E82711AD /* UIKit.framework in Frameworks */,
-				46730C550F2E34CCC6B9776E /* libPods-ReactDrum (App).a in Frameworks */,
+				FB9079307B65AACA84A0BADA /* libPods-ReactDrum (App).a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1504,7 +1504,7 @@
 				0701B18F8080F2724DE303E5 /* OpenGLES.framework */,
 				CB4DB0F8412AD626900A547B /* QuartzCore.framework */,
 				B87C41F070365CE58D7224AA /* UIKit.framework */,
-				09BBE3E1FCD25C55082DD8D3 /* libPods-ReactDrum (App).a */,
+				50AA18F986F29FEC1582D99B /* libPods-ReactDrum (App).a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2292,7 +2292,7 @@
 				EB426E590A0BB7263F89D7BC /* Resources */,
 				1FBBB43041CB5CD16B0D20B7 /* Frameworks */,
 				D3D5A21252479FEE1454837A /* Products */,
-				E0CE1295ECF140808B571FFA /* Pods */,
+				CC480F2861E88DE523E6F518 /* Pods */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -3039,6 +3039,15 @@
 			name = undomanager;
 			sourceTree = "<group>";
 		};
+		CC480F2861E88DE523E6F518 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				08E1E4E4DF2126E10CB17F2F /* Pods-ReactDrum (App).debug.xcconfig */,
+				FABE980E9B74F87CD8C60230 /* Pods-ReactDrum (App).release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CC94E25DBA33929B187EC1E6 /* native */ = {
 			isa = PBXGroup;
 			children = (
@@ -3161,15 +3170,6 @@
 				A882AA81A8C8BA2FCE400B4B /* juce_win32_Messaging.cpp */,
 			);
 			name = native;
-			sourceTree = "<group>";
-		};
-		E0CE1295ECF140808B571FFA /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5D9490E235CF6BE40048053F /* Pods-ReactDrum (App).debug.xcconfig */,
-				3CD41769373BCFBD98A408D3 /* Pods-ReactDrum (App).release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		E0DC15172D42A2B900C2D710 /* codecs */ = {
@@ -3553,12 +3553,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D37FCE18B934154C426E7187 /* Build configuration list for PBXNativeTarget "ReactDrum (App)" */;
 			buildPhases = (
-				382CEAA45B9BC62FDC62B772 /* [CP] Check Pods Manifest.lock */,
+				BC6C564A23FB475374FB36A6 /* [CP] Check Pods Manifest.lock */,
 				008EB41EB8AB49E840CEC1C1 /* Resources */,
 				1B472CF2AD2AD1E59F160621 /* Sources */,
 				5A1E42DAF5E5819EF1053AA5 /* Frameworks */,
-				C5078087DEC7112FF6BA006B /* [CP] Embed Pods Frameworks */,
-				B4D96CF880CDA716AE84E724 /* [CP] Copy Pods Resources */,
+				8B410B65FD84AB8DAA778972 /* [CP] Embed Pods Frameworks */,
+				5A8B870FAA5A162E22AE6421 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3617,22 +3617,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		382CEAA45B9BC62FDC62B772 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B4D96CF880CDA716AE84E724 /* [CP] Copy Pods Resources */ = {
+		5A8B870FAA5A162E22AE6421 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3647,7 +3632,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactDrum (App)/Pods-ReactDrum (App)-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C5078087DEC7112FF6BA006B /* [CP] Embed Pods Frameworks */ = {
+		8B410B65FD84AB8DAA778972 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3660,6 +3645,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactDrum (App)/Pods-ReactDrum (App)-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BC6C564A23FB475374FB36A6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3748,7 +3748,7 @@
 		};
 		46CF0850403CE59073DB5838 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CD41769373BCFBD98A408D3 /* Pods-ReactDrum (App).release.xcconfig */;
+			baseConfigurationReference = FABE980E9B74F87CD8C60230 /* Pods-ReactDrum (App).release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3782,7 +3782,7 @@
 		};
 		6C21B644E9A919B76C52917A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5D9490E235CF6BE40048053F /* Pods-ReactDrum (App).debug.xcconfig */;
+			baseConfigurationReference = 08E1E4E4DF2126E10CB17F2F /* Pods-ReactDrum (App).debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

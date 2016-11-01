@@ -18,6 +18,33 @@ const ReactJuceView = requireNativeComponent('ReactJuceView', JuceComponent, {
 console.log("done requireNativeComponent")
 
 class JuceComponent extends React.Component {
+  static navigatorButtons = {
+    leftButtons: [{
+      icon: require('../../../images/navicon_menu.png'),
+      id: 'sideMenu'
+    }],
+    rightButtons: [
+    {
+      title: 'Edit',
+      id: 'edit'
+    },
+    {
+      icon: require('../../../images/navicon_add.png'),
+      id: 'add'
+    }
+    ]
+  };
+
+  static navigatorStyle = {
+    navBarBackgroundColor: '#4dbce9',
+    navBarTextColor: '#ffff00',
+    navBarSubtitleTextColor: '#ff0000',
+    navBarButtonColor: '#ffffff',
+    statusBarTextColorScheme: 'light',
+    tabBarBackgroundColor: '#4dbce9',
+    tabBarButtonColor: '#ffffff',
+    tabBarSelectedButtonColor: '#ffff00'
+  };
 
   static propTypes = {
     ...View.propTypes,
@@ -38,7 +65,7 @@ class JuceComponent extends React.Component {
   }
 
   render() {
-    return <ReactJuceView {...this.props} />
+    return <ReactJuceView {...this.props} key="ReactJuceView"/>
   }
 }
 
@@ -66,7 +93,7 @@ class DrumPlayer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <JuceComponent style={{flex: 1}} onPressModalButton={this.showModal} />
+        <JuceComponent style={{flex: 1}} onPressModalButton={this.showModal} key="JuceComponent"/>
       </View>
     )
   }
