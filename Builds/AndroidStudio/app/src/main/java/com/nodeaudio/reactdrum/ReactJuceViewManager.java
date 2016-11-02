@@ -12,6 +12,7 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.juce.JuceBridge;
 import com.juce.JuceViewHolder;
@@ -46,6 +47,11 @@ public class ReactJuceViewManager extends SimpleViewManager<JuceViewHolder> {
     @Override
     public String getName() {
         return REACT_CLASS;
+    }
+
+    @ReactProp(name = "sampleName")
+    public void setSrc(ReactJuceView view, @Nullable String sampleName) {
+        MainActivity.selectSample(sampleName);
     }
 
     @Override

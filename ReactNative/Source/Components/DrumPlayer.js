@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, StyleSheet, NativeModules, requireNativeComponent } from 'react-native'
+import { observer } from 'mobx-react/native'
+import { ReactDrumStore } from '../Store'
 
 var styles = StyleSheet.create({
   container: {
@@ -69,13 +71,10 @@ class JuceComponent extends React.Component {
   }
 }
 
-
+@observer
 class DrumPlayer extends Component {
   constructor() {
     super()
-    this.state = {
-      sampleName: "Roll"
-    }
   }
 
   componentWillMount() {
@@ -97,9 +96,11 @@ class DrumPlayer extends Component {
   }
 
   render() {
+    // console.log (ReactDrumStore)
+    // console.log (ReactDrumStore.currentSample)
     return (
       <View style={styles.container}>
-        <JuceComponent style={{flex: 1}} onPressModalButton={this.showModal} sampleName={this.state.sampleName} ref="JuceComp" key="JuceComponent"/>
+        <JuceComponent style={{flex: 1}} onPressModalButton={this.showModal} sampleName="Roll" ref="JuceComp" key="JuceComponent"/>
       </View>
     )
   }

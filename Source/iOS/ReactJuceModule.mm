@@ -33,11 +33,11 @@ RCT_REMAP_METHOD(getSampleNames, sampleNamesResolver: (RCTPromiseResolveBlock)re
     resolve([NSArray arrayWithArray:sampleNames]);
 }
 
-RCT_EXPORT_METHOD(selectSample:(NSString *)sampleName)
-{
-    SharedResourcePointer<MainContentComponent> mainComponent;
-    String juceSampleName = CharPointer_UTF8 ([sampleName UTF8String]);
-    mainComponent->loadSampleFromName((juceSampleName));
-}
+//RCT_EXPORT_METHOD(selectSample:(NSString *)sampleName)
+//{
+//    SharedResourcePointer<MainContentComponent> mainComponent;
+//    String juceSampleName = CharPointer_UTF8 ([sampleName UTF8String]);
+//    mainComponent->loadSampleFromName((juceSampleName));
+//}
 
 @end

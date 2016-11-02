@@ -4,7 +4,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
@@ -13,8 +13,10 @@ import {
   ListView,
   TouchableHighlight,
   NativeModules
-} from 'react-native';
-import {Navigation} from 'react-native-navigation';
+} from 'react-native'
+import { Navigation } from 'react-native-navigation'
+import { observer } from 'mobx-react/native'
+import { ReactDrumStore } from './Store'
 
 import DrumPlayer from './Components/DrumPlayer'
 
@@ -40,7 +42,7 @@ class SampleListScreen extends Component {
   }
 
   pressRow(sampleName) {
-    ReactJuceModule.selectSample(sampleName)
+    ReactDrumStore.currentSample = sampleName
     this.props.navigator.toggleDrawer({
       side: 'left',
       animated: true,

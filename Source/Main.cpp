@@ -176,7 +176,7 @@ JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, selectSample, void, (JNIEnv*
         
         if (sampleNameJavaString != nullptr) {
             const char *sampleName = (env)->GetStringUTFChars (sampleNameJavaString, NULL);
-            app->mainComponent->loadSampleFromName(sampleName);
+            app->getMainComponent()->loadSampleFromName(sampleName);
         }
         else
         {
