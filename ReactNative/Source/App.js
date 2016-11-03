@@ -16,7 +16,7 @@ import {
 } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { observer } from 'mobx-react/native'
-import { ReactDrumStore } from './Store'
+import ReactDrumStore from './Store'
 
 import DrumPlayer from './Components/DrumPlayer'
 

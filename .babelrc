@@ -1,4 +1,5 @@
 {
   "presets": ["react-native"],
+  "presets": ["react-native-stage-0/decorator-support"],
   "plugins": ["transform-decorators-legacy"]
 }
