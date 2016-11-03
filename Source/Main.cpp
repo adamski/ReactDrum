@@ -68,6 +68,9 @@ public:
 
 
 #if JUCE_ANDROID
+
+        mainComponent = new MainContentComponent();
+
         // Set up our windows that will be attached to Android views
         container = new ResizableWindow ("MainComponent", true);
         container->setContentOwned (mainComponent, true);
