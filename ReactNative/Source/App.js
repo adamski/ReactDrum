@@ -19,6 +19,8 @@ import { observer } from 'mobx-react/native'
 import ReactDrumStore from './Store'
 
 import DrumPlayer from './Components/DrumPlayer'
+import PushedScreen from './Components/PushedScreen'
+import StyledScreen from './Components/StyledScreen'
 
 var ReactJuceModule = NativeModules.ReactJuceModule
 
@@ -60,7 +62,7 @@ class SampleListScreen extends Component {
               onPress={() => this.pressRow(rowData)} 
               underlayColor="grey">
               <View style={styles.rowContainer}>
-                <Text style={styles.title}>{rowData}</Text>
+                <Text style={styles.sampleListText}>{rowData}</Text>
               </View>
             </TouchableHighlight>
           )}
@@ -80,16 +82,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  rowContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    height: 35,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  sampleListText: {
+    fontSize: 25
+  }
 });
 
 
@@ -99,6 +100,8 @@ export default class App {
 
     Navigation.registerComponent('reactDrum.SampleListScreen', () => SampleListScreen)
     Navigation.registerComponent('reactDrum.DrumPlayer', () => DrumPlayer)
+    Navigation.registerComponent('reactDrum.PushedScreen', () => PushedScreen)
+    Navigation.registerComponent('reactDrum.StyledScreen', () => StyledScreen)
 
     Navigation.startSingleScreenApp({
       screen: {

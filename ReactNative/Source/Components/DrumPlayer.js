@@ -20,33 +20,6 @@ const ReactJuceView = requireNativeComponent('ReactJuceView', JuceComponent, {
 console.log("done requireNativeComponent")
 
 class JuceComponent extends React.Component {
-  static navigatorButtons = {
-    leftButtons: [{
-      icon: require('../../../images/navicon_menu.png'),
-      id: 'sideMenu'
-    }],
-    rightButtons: [
-    {
-      title: 'Edit',
-      id: 'edit'
-    },
-    {
-      icon: require('../../../images/navicon_add.png'),
-      id: 'add'
-    }
-    ]
-  };
-
-  static navigatorStyle = {
-    navBarBackgroundColor: '#4dbce9',
-    navBarTextColor: '#ffff00',
-    navBarSubtitleTextColor: '#ff0000',
-    navBarButtonColor: '#ffffff',
-    statusBarTextColorScheme: 'light',
-    tabBarBackgroundColor: '#4dbce9',
-    tabBarButtonColor: '#ffffff',
-    tabBarSelectedButtonColor: '#ffff00'
-  };
 
   static propTypes = {
     ...View.propTypes,
@@ -73,32 +46,71 @@ class JuceComponent extends React.Component {
 
 @observer
 class DrumPlayer extends Component {
-  constructor() {
-    super()
+  static navigatorButtons = {
+    leftButtons: [{
+      icon: require('../../../images/navicon_menu.png'),
+      id: 'menu'
+    }],
+    rightButtons: [
+    {
+      title: 'Edit',
+      id: 'edit'
+    },
+    {
+      icon: require('../../../images/navicon_add.png'),
+      id: 'add'
+    }
+    ]
   }
 
-  componentWillMount() {
-    // ScaleController.updateScaleFromJSON (JSON.stringify (scaleStore.currentScale.scale))
+  static navigatorStyle = {
+    drawUnderNavBar: true,
+    navBarBackgroundColor: '#4dbce9',
+    navBarTextColor: '#ffff00',
+    navBarSubtitleTextColor: '#ff0000',
+    navBarButtonColor: '#ffffff',
+    navigationBarColor: '#4dbce9', // for Android ...
+    statusBarTextColorScheme: 'light',
+    tabBarBackgroundColor: '#4dbce9',
+    tabBarButtonColor: '#ffffff',
+    tabBarSelectedButtonColor: '#ffff00'
   }
 
-  showModal = () => {
-    console.log("showModal from DrumPlayer")
+  constructor(props) {
+    super(props);
+    // if you want to listen on navigator events, set this up
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+  }
 
-    this.props.navigator.showModal({
-      screen: "reactDrum.ModalScreen",
-      title: "Modal Screen",
-      style: {
-        backgroundBlur: "none",
-        backgroundColor: "#888888DD"
-      },
-      navigatorStyle: { navBarHidden: true, ...navigatorStyle }
-    }) 
+  onNavigatorEvent(event) {
+    if (event.id == 'add') {
+      AlertIOS.alert('NavBar', 'Add button pressed');
+    } 
+    if (event.id === 'menu') {
+      this.props.navigator.toggleDrawer({
+        side: 'left',
+        animated: true
+      })
+    }
+    if (event.id == 'edit') {
+
+      this.props.navigator.push({
+        title: "More",
+        screen: "reactDrum.PushedScreen"
+      });
+    }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <JuceComponent style={{flex: 1}} onPressModalButton={this.showModal} sampleName={ReactDrumStore.currentSample} ref="JuceComp" key="JuceComponent"/>
+        <JuceComponent 
+          style={{flex: 1}} 
+          sampleName={ReactDrumStore.currentSample} 
+          backgroundColour="ff000000"
+          thumbnailForeground="ff4dbce9"
+          thumbnailBackground="ff333333"
+          key="JuceComponent"/>
       </View>
     )
   }

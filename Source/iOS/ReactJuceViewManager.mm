@@ -22,6 +22,21 @@ RCT_CUSTOM_VIEW_PROPERTY(sampleName, NSString, ReactDrumView)
     [view selectSample:([RCTConvert NSString:json])];
 }
 
+RCT_CUSTOM_VIEW_PROPERTY(backgroundColour, NSString, ReactDrumView)
+{
+    [view setComponentBackgroundColour:([RCTConvert NSString:json])];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(thumbnailForeground, NSString, ReactDrumView)
+{
+    [view setThumbnailForeground:([RCTConvert NSString:json])];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(thumbnailBackground, NSString, ReactDrumView)
+{
+    [view setThumbnailBackground:([RCTConvert NSString:json])];
+}
+
 - (UIView *)view
 {
     MainContentComponent* mainComponent = new MainContentComponent();

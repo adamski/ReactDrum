@@ -50,8 +50,23 @@ public class ReactJuceViewManager extends SimpleViewManager<JuceViewHolder> {
     }
 
     @ReactProp(name = "sampleName")
-    public void setSrc(ReactJuceView view, @Nullable String sampleName) {
+    public void setSampleName(ReactJuceView view, @Nullable String sampleName) {
         MainActivity.selectSample(sampleName);
+    }
+
+    @ReactProp(name = "backgroundColour")
+    public void setBackgroundColour(ReactJuceView view, @Nullable String colour) {
+        MainActivity.setBackgroundColour(colour);
+    }
+
+    @ReactProp(name = "thumbnailForeground")
+    public void setThumbnailForeground(ReactJuceView view, @Nullable String colour) {
+        MainActivity.setThumbnailForeground(colour);
+    }
+
+    @ReactProp(name = "thumbnailBackground")
+    public void setThumbnailBackground(ReactJuceView view, @Nullable String colour) {
+        MainActivity.setThumbnailBackground(colour);
     }
 
     @Override

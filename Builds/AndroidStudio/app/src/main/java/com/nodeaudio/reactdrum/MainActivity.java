@@ -25,6 +25,9 @@ public class MainActivity   extends SplashActivity
     public static native void attachOpenGLContext (String componentName);
     public static native String[] getSampleNames();
     public static native void selectSample (String sampleName);
+    public static native void setBackgroundColour (String colour);
+    public static native void setThumbnailForeground (String colour);
+    public static native void setThumbnailBackground (String colour);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

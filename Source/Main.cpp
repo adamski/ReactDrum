@@ -189,4 +189,62 @@ JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, selectSample, void, (JNIEnv*
     }
 }
 
+JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, setBackgroundColour, void, (JNIEnv* env, jclass, jstring colourJavaString))
+{
+    ReactDrumApplication* const app = dynamic_cast<ReactDrumApplication*> (JUCEApplication::getInstance());
+    if (app != nullptr)
+    {
+        jassert (app->getMainComponent() != nullptr);
+
+        if (colourJavaString != nullptr) {
+            const char *colour = (env)->GetStringUTFChars (colourJavaString, NULL);
+            app->getMainComponent()->setBackgroundColour (colour);
+        }
+        else
+        {
+            Logger::writeToLog("Null string sent to setBackgroundColour");
+            // TODO: Notify user; JS callback or JUCE MessageDialog
+        }
+    }
+}
+
+JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, setThumbnailForeground, void, (JNIEnv* env, jclass, jstring colourJavaString))
+{
+    ReactDrumApplication* const app = dynamic_cast<ReactDrumApplication*> (JUCEApplication::getInstance());
+    if (app != nullptr)
+    {
+        jassert (app->getMainComponent() != nullptr);
+
+        if (colourJavaString != nullptr) {
+            const char *colour = (env)->GetStringUTFChars (colourJavaString, NULL);
+            app->getMainComponent()->setThumbnailForeground (colour);
+        }
+        else
+        {
+            Logger::writeToLog("Null string sent to setThumbnailForeground");
+            // TODO: Notify user; JS callback or JUCE MessageDialog
+        }
+    }
+}
+
+
+JUCE_JNI_CALLBACK (JUCE_ANDROID_ACTIVITY_CLASSNAME, setThumbnailBackground, void, (JNIEnv* env, jclass, jstring colourJavaString))
+{
+    ReactDrumApplication* const app = dynamic_cast<ReactDrumApplication*> (JUCEApplication::getInstance());
+    if (app != nullptr)
+    {
+        jassert (app->getMainComponent() != nullptr);
+
+        if (colourJavaString != nullptr) {
+            const char *colour = (env)->GetStringUTFChars (colourJavaString, NULL);
+            app->getMainComponent()->setThumbnailBackground (colour);
+        }
+        else
+        {
+            Logger::writeToLog("Null string sent to setThumbnailBackground");
+            // TODO: Notify user; JS callback or JUCE MessageDialog
+        }
+    }
+}
+
 #endif

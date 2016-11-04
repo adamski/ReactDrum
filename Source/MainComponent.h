@@ -34,6 +34,8 @@ public:
         playButton.setButtonText ("Play");
         playButton.addListener (this);
         playButton.setColour (TextButton::buttonColourId, Colours::green);
+        playButton.setColour (TextButton::textColourOnId, Colours::lightgrey);
+        playButton.setColour (TextButton::textColourOffId, Colours::white);
         playButton.setEnabled (false);
         playButton.setTriggeredOnMouseDown (true);
         
@@ -135,31 +137,42 @@ public:
     {
         if (button == &playButton)  playButtonClicked();
     }
-    
+
+    void setBackgroundColour(String colourString)
+    {
+        backgroundColour = Colour::fromString (colourString);
+        repaint();
+    }
+
     void setPlayButtonColour(String colourString)
     {
         playButton.setColour (TextButton::buttonColourId, Colour::fromString (colourString));
+        repaint();
     }
     
     void setPlayButtonTextColour(String colourString)
     {
         playButton.setColour (TextButton::textColourOnId, Colour::fromString (colourString));
         playButton.setColour (TextButton::textColourOffId, Colour::fromString (colourString));
+        repaint();
     }
     
     void setThumbnailBackground(String colourString)
     {
         thumbnailBackground = Colour::fromString (colourString);
+        repaint();
     }
     
     void setThumbnailForeground(String colourString)
     {
         thumbnailForeground = Colour::fromString (colourString);
+        repaint();
     }
     
     void setAudioPositionColour(String colourString)
     {
         audioPositionColour = Colour::fromString (colourString);
+        repaint();
     }
     
 private:
@@ -247,20 +260,13 @@ private:
         
         if ((readerSource = new AudioFormatReaderSource (reader, false)))
         {
-//#if JUCE_ANDROID
-////            MessageManagerLock mm;
-////            DBG ("MessageManagerLock");
-//            DBG ("Aboout to set new readerSource...");
-//            transportSource.setSource (readerSource, 8192, &timeSliceThread, reader->sampleRate);
-//#else
-            
             transportSource.setSource (readerSource, 0, nullptr, reader->sampleRate);
-//#endif
-            DBG ("Aboout to set new thumbnail reader");
+
+            DBG ("About to set new thumbnail reader");
             thumbnail.setReader (reader.release(), generateHashForSample (data, 128));
-            DBG ("Aboout to playButton.setEnabled");
+            DBG ("About to playButton.setEnabled");
             playButton.setEnabled (true);
-            DBG ("Aboout to setPosition(0.0");
+            DBG ("About to setPosition(0.0");
             transportSource.setPosition(0.0);
             thumbnailChanged();
         }
