@@ -9,34 +9,16 @@ var styles = StyleSheet.create({
   }
 });
 
-// const ScaleController = NativeModules.ReactScaleController;
-
-console.log("about to requireNativeComponent ReactJuceView")
-const ReactJuceView = requireNativeComponent('ReactJuceView', JuceComponent, { 
-  nativeOnly: {
-    showModal: true
-  }
-})
-console.log("done requireNativeComponent")
+const ReactJuceView = requireNativeComponent('ReactJuceView', JuceComponent, {})
 
 class JuceComponent extends React.Component {
 
   static propTypes = {
-    ...View.propTypes,
-    onPressModalButton: React.PropTypes.func, 
-    dummy: PropTypes.string
+    ...View.propTypes
   }
 
   constructor(props) {
     super(props)
-  }
-
-  showModal = (event: Event) => { 
-
-    if (!this.props.onPressModalButton)
-      return
-
-    this.props.onPressModalButton(event.nativeEvent.showModal)
   }
 
   render() {
@@ -109,7 +91,7 @@ class DrumPlayer extends Component {
           sampleName={ReactDrumStore.currentSample} 
           backgroundColour="ff000000"
           thumbnailForeground="ff4dbce9"
-          thumbnailBackground="ff333333"
+          thumbnailBackground="ff444444"
           key="JuceComponent"/>
       </View>
     )
