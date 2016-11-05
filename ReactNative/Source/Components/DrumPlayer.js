@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, StyleSheet, NativeModules, requireNativeComponent } from 'react-native'
+import { View, Text, Alert, StyleSheet, NativeModules, requireNativeComponent } from 'react-native'
 import { observer } from 'mobx-react/native'
 import ReactDrumStore from '../Store'
 
@@ -66,7 +66,7 @@ class DrumPlayer extends Component {
 
   onNavigatorEvent(event) {
     if (event.id == 'add') {
-      AlertIOS.alert('NavBar', 'Add button pressed');
+      Alert.alert('NavBar', 'Add button pressed');
     } 
     if (event.id === 'menu') {
       this.props.navigator.toggleDrawer({
