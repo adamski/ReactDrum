@@ -18,7 +18,7 @@ import { Navigation } from 'react-native-navigation'
 import { observer } from 'mobx-react/native'
 import ReactDrumStore from './Store'
 
-import DrumPlayer from './Components/DrumPlayer'
+import DrumPlayerScreen from './Components/DrumPlayerScreen'
 import PushedScreen from './Components/PushedScreen'
 import StyledScreen from './Components/StyledScreen'
 
@@ -99,13 +99,13 @@ export default class App {
   constructor() {
 
     Navigation.registerComponent('reactDrum.SampleListScreen', () => SampleListScreen)
-    Navigation.registerComponent('reactDrum.DrumPlayer', () => DrumPlayer)
+    Navigation.registerComponent('reactDrum.DrumPlayerScreen', () => DrumPlayerScreen)
     Navigation.registerComponent('reactDrum.PushedScreen', () => PushedScreen)
     Navigation.registerComponent('reactDrum.StyledScreen', () => StyledScreen)
 
     Navigation.startSingleScreenApp({
       screen: {
-        screen: 'reactDrum.DrumPlayer',
+        screen: 'reactDrum.DrumPlayerScreen',
         title: 'JUCE + React Native'
       },
       drawer: { // optional, add this if you want a side menu drawer in your app
