@@ -17,6 +17,7 @@ Install `podspec-generator`: `npm install -g podspec-generator`
 ### For iOS:
 
 `cd Builds/iOS`
+
 `pod install`
 
 ### For Android
