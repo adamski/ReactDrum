@@ -251,7 +251,8 @@ private:
         MemoryInputStream* soundBuffer = new MemoryInputStream (data, static_cast<std::size_t> (dataSize), false);
         DBG ("soundBuffer");
 
-        ScopedPointer<AudioFormatReader> reader = formatManager.findFormatForFileExtension (format)->createReaderFor (soundBuffer, true);
+        AudioFormatReader* reader = formatManager.findFormatForFileExtension (format)->createReaderFor (soundBuffer, true);
+
         DBG ("got new reader");
 
         if (reader == nullptr)
@@ -260,18 +261,13 @@ private:
             return;
         }
         
-        if ((readerSource = new AudioFormatReaderSource (reader, false)))
-        {
-            transportSource.setSource (readerSource, 0, nullptr, reader->sampleRate);
-
-            DBG ("About to set new thumbnail reader");
-            thumbnail.setReader (reader.release(), generateHashForSample (data, 128));
-            DBG ("About to playButton.setEnabled");
-            playButton.setEnabled (true);
-            DBG ("About to setPosition(0.0");
-            transportSource.setPosition(0.0);
-            thumbnailChanged();
-        }
+        ScopedPointer<AudioFormatReaderSource> newSource = new AudioFormatReaderSource (reader, false);
+        transportSource.setSource (newSource, 0, nullptr, reader->sampleRate);
+        thumbnail.setReader (reader, generateHashForSample (data, 128));
+        playButton.setEnabled (true);
+        transportSource.setPosition(0.0);
+        readerSource = newSource.release();
+        thumbnailChanged();
     }
     
     int generateHashForSample(const void* data, const int upperLimit)
@@ -290,17 +286,13 @@ private:
     //==========================================================================
     TextButton playButton;
 
-    AudioFormatManager formatManager;                    // [3]
+    AudioFormatManager formatManager;
     ScopedPointer<AudioFormatReaderSource> readerSource;
-    ScopedPointer<AudioFormatReader> formatReader;
     AudioTransportSource transportSource;
     HashMap<String, String> sampleHashMap;
-    AudioThumbnailCache thumbnailCache;                  // [1]
-    AudioThumbnail thumbnail;                            // [2]
-//    TimeSliceThread timeSliceThread;
+    AudioThumbnailCache thumbnailCache;
+    AudioThumbnail thumbnail;
 
-//    AudioProcessorPlayer& player;
-//    MidiKeyboardState keyboardState;
     SharedResourcePointer<AudioDeviceManager> deviceManager;
     AudioSourcePlayer player;
 
