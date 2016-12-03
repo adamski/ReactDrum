@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="Ow8IIC" name="ReactDrum" projectType="guiapp" version="1.0.0"
               bundleIdentifier="com.nodeaudio.ReactDrum" includeBinaryInAppConfig="1"
-              jucerVersion="4.2.4">
+              jucerVersion="4.3.0">
   <MAINGROUP id="ZOLEZW" name="ReactDrum">
     <GROUP id="{49A6A868-6004-6CB5-220F-414C754B4F69}" name="iOS">
       <FILE id="tyHdzP" name="ReactDrumView.mm" compile="1" resource="0"

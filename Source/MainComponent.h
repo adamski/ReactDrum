@@ -57,7 +57,7 @@ public:
 //        Colour proAudioIconColour = findColour (TextButton::buttonColourId);
 //        proAudioIcon.setFill (FillType (proAudioIconColour));
 
-        loadSampleFromName ("Chhhhaah");
+        //loadSampleFromName ("Chhhhaah");
 
 //#if JUCE_ANDROID
 //        timeSliceThread.startThread(9);
@@ -81,9 +81,11 @@ public:
         DBG ("loadSampleFromName: " << name);
         int dataSizeInBytes;
         name = name.replace(" ", "_");
-        const char* filename = BinaryData::getNamedResource (String (name + "_" + String (audioFormatExtension)).toRawUTF8(), dataSizeInBytes);
+        String resourceNameString (name + "_" + String (audioFormatExtension));
+        const char* resourceName = resourceNameString.toRawUTF8();
+        const char* fileData = BinaryData::getNamedResource (resourceName, dataSizeInBytes);
         
-        loadNewSample (filename, dataSizeInBytes, audioFormatExtension);
+        loadNewSample (fileData, dataSizeInBytes, audioFormatExtension);
     }
 
     void prepareToPlay (int samplesPerBlockExpected, double sampleRate) override
