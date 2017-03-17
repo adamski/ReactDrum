@@ -11,7 +11,7 @@
     "mobx-react": "^3.5.8",
     "react": "15.2.1",
     "react-native": "0.31.0",
-    "react-native-navigation": "next"
+    "react-native-navigation": "2.0.0-experimental.137"
   },
   "devDependencies": {
     "autobind-decorator": "^1.3.4",
