@@ -6,6 +6,9 @@ It demonstrates using JUCE to create a custom view in a React Native app.
 
 It uses React Native Navigation for navigation and MobX for state management. 
 
+## *Note* 
+This project is quite out of date, based on now old versions of React Native and React Native Navigation, and also a fork of JUCE 4.3 (current version as of writing is 5.02). To be updated soon.. 
+
 ## Installation:
 
 Install `podspec-generator`: `npm install -g podspec-generator`
