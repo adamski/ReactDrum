@@ -1,18 +1,14 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle-experimental:0.8.0'
-    }
+   repositories {
+       jcenter()
+   }
+   dependencies {
+       classpath 'com.android.tools.build:gradle:0.8.0'
+   }
 }
+
 allprojects {
-    repositories {
-        mavenLocal()
-        jcenter()
-        
-        maven {
-            url "$rootDir/../../node_modules/react-native/android"
-        }
-    }
+   repositories {
+       jcenter()
+   }
 }

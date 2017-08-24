@@ -16,6 +16,27 @@
   "devDependencies": {
     "autobind-decorator": "^1.3.4",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-preset-react-native-stage-0": "^1.0.1"
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "detox": "^5.6.1",
+    "mocha": "^3.5.0"
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "Builds/iOS/Build/Products/Debug-iphonesimulator/ReactDrum.app",
+        "build": "xcodebuild -workspace Builds/iOS/ReactDrum.xcworkspace -scheme 'ReactDrum - App' -configuration Debug -sdk iphonesimulator -derivedDataPath Builds/iOS/Build",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+      },
+      "ios.sim.release": {
+        "binaryPath": "Builds/iOS/Build/Products/Release-iphonesimulator/ReactDrum.app",
+        "build": "xcodebuild -workspace Builds/iOS/ReactDrum.xcworkspace -scheme 'ReactDrum - App' -configuration Release -sdk iphonesimulator -derivedDataPath Builds/iOS/Build",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+      },
+      "xcode": {
+        "type": "ios.none"
+      }
+    }
   }
 }

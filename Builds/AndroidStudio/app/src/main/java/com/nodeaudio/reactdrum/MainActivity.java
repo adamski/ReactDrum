@@ -1,58 +1,80 @@
+/*
+  ==============================================================================
+
+   This file is part of the JUCE library.
+   Copyright (c) 2015 - ROLI Ltd.
+
+   Permission is granted to use this software under the terms of either:
+   a) the GPL v2 (or any later version)
+   b) the Affero GPL v3
+
+   Details of these licenses can be found at: www.gnu.org/licenses
+
+   JUCE is distributed in the hope that it will be useful, but WITHOUT ANY
+   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+   A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+   ------------------------------------------------------------------------------
+
+   To release a closed-source product which uses JUCE, commercial licenses are
+   available: visit www.juce.com for more information.
+
+  ==============================================================================
+*/
+
 package com.nodeaudio.reactdrum;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-
 import android.media.AudioManager;
 
-import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.ReactContext;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.juce.JuceBridge;
-import com.reactnativenavigation.NavigationApplication;
-import com.reactnativenavigation.controllers.SplashActivity;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 //==============================================================================
-public class MainActivity   extends SplashActivity
+public class MainActivity   extends Activity
 {
     private JuceBridge juceBridge;
 
-    public static native void attachOpenGLContext (String componentName);
-    public static native String[] getSampleNames();
-    public static native void selectSample (String sampleName);
-    public static native void setBackgroundColour (String colour);
-    public static native void setThumbnailForeground (String colour);
-    public static native void setThumbnailBackground (String colour);
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         juceBridge = JuceBridge.getInstance();
         juceBridge.setActivityContext(this);
         juceBridge.setScreenSaver(true);
+        juceBridge.hideActionBar();
+        setContentView(juceBridge.getViewHolder());
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        Log.d ("onCreate", "finished");
-        String[] sampleNames = getSampleNames();
-        for (int i=0; i<sampleNames.length; i++)
-        {
-            Log.d("test", sampleNames[i]);
-        }
-
     }
 
     @Override
-    public void onStart()
+    protected void onDestroy()
     {
-        super.onStart();
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        juceBridge.setScreenSize(metrics.widthPixels, metrics.heightPixels, metrics.densityDpi);
-        juceBridge.callAppLauncher();
+        juceBridge.quitApp();
+        super.onDestroy();
+
+        juceBridge.clearDataCache();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        juceBridge.suspendApp();
+
+        try
+        {
+            Thread.sleep(1000); // This is a bit of a hack to avoid some hard-to-track-down
+                                // openGL glitches when pausing/resuming apps..
+        } catch (InterruptedException e) {}
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        juceBridge.resumeApp();
     }
 
     @Override

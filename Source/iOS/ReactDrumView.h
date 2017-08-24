@@ -12,7 +12,7 @@
 #define REACTDRUMVIEW_H_INCLUDED
 
 #import "ReactJuceView.h"
-#include "MainComponent.h"
+#include "../MainComponent.h"
 
 @interface ReactDrumView : ReactJuceView
 
