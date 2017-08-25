@@ -1,0 +1,36 @@
+PODS:
+  - React/Core (0.31.0):
+    - React/CSSLayout
+  - React/CSSLayout (0.31.0)
+  - React/RCTImage (0.31.0):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTNetwork (0.31.0):
+    - React/Core
+  - React/RCTText (0.31.0):
+    - React/Core
+  - React/RCTWebSocket (0.31.0):
+    - React/Core
+  - ReactNativeNavigation (2.0.0-experimental.137)
+
+DEPENDENCIES:
+  - React/Core (from `../../node_modules/react-native`)
+  - React/RCTImage (from `../../node_modules/react-native`)
+  - React/RCTNetwork (from `../../node_modules/react-native`)
+  - React/RCTText (from `../../node_modules/react-native`)
+  - React/RCTWebSocket (from `../../node_modules/react-native`)
+  - ReactNativeNavigation (from `../../node_modules/react-native-navigation`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: "../../node_modules/react-native"
+  ReactNativeNavigation:
+    :path: "../../node_modules/react-native-navigation"
+
+SPEC CHECKSUMS:
+  React: 2f91a7f6fa19461502109a1e6ad6e0626ce76920
+  ReactNativeNavigation: 938be03e464f93447fd45e64c794618f2fba2341
+
+PODFILE CHECKSUM: d3301a9ff623192932687fbd30fcd4ce9397c71b
+
+COCOAPODS: 1.2.1

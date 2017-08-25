@@ -57,6 +57,8 @@ MainWindow::MainWindow (String name)  : DocumentWindow (name,
     jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
     
+    DBG ("Starting React Native and RNN...");
+    
     /** 
      * React Native Navigation bootstrap
      */
@@ -67,7 +69,6 @@ MainWindow::MainWindow (String name)  : DocumentWindow (name,
     appDelegate.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     appDelegate.window.backgroundColor = [UIColor blackColor];
     [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation];
-    
 
     /**
      * This is the bootstrap for "vanilla" React Native
