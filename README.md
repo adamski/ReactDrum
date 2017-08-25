@@ -8,6 +8,8 @@ It uses React Native Navigation for navigation and MobX for state management.
 
 ## Installation:
 
+If you don't already have it, get JUCE and the Projucer running. https://www.juce.com/get-juce
+
 Install `podspec-generator`: `npm install -g podspec-generator`
 
 `npm install`
@@ -15,6 +17,8 @@ Install `podspec-generator`: `npm install -g podspec-generator`
 `podspec-generator node_modules/react-native-navigation`
 
 ### For iOS:
+
+Load ReactDrum.jucer in Projucer and save the iOS exporter. (Don't open it in Xcode yet). 
 
 `cd Builds/iOS`
 
